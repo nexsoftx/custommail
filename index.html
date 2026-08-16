@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi Mail - Best Temporary Email</title>
+    
+    <!-- Firebase SDK (গ্লোবাল ডেটাবেসের জন্য) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.1/firebase-database-compat.js"></script>
+
+    <style>
+        /* বেসিক রিসেট ও ফন্ট */
+        * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; }
+        body { background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%); color: #333; display: flex; flex-direction: column; min-height: 100vh; }
+        
+        /* ন্যাভিগেশন বার */
+        .navbar { display: flex; justify-content: center; align-items: center; padding: 20px; background: transparent; gap: 30px; }
+        .navbar a { text-decoration: none; color: #555; font-size: 15px; font-weight: 600; transition: color 0.2s; cursor: pointer; }
+        .navbar a.active, .navbar a:hover { color: #007bff; }
+
+        /* পেজ ভিউ কন্ট্রোল */
+        .page-view { display: none; animation: fadeIn 0.3s ease-in-out; }
+        .page-view.active { display: block; }
+
+        /* হিরো সেকশন */
+        .hero { text-align: center; padding: 30px 20px 25px; display: flex; flex-direction: column; align-items: center; }
+        .badge { display: inline-flex; align-items: center; gap: 6px; background: #fff; border: 1px solid #e1e4e8; padding: 6px 14px; border-radius: 30px; font-size: 13px; font-weight: 600; box-shadow: 0 4px 8px rgba(0,0,0,0.04); margin-bottom: 15px; }
+        .hero h1 { font-size: 34px; font-weight: 800; color: #1a1a1a; margin-bottom: 12px; }
+        .hero p { font-size: 16px; color: #555; max-width: 600px; line-height: 1.5; margin: 0 auto; }
+
+        /* মেইন কন্টেইনার */
+        .main-wrapper { display: flex; justify-content: center; padding: 0 20px 40px; flex: 1; }
+        .container { background-color: #ffffff; padding: 25px 30px; border-radius: 14px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06); width: 100%; max-width: 900px; display: flex; gap: 30px; }
+        .domain-container { max-width: 600px; flex-direction: column; margin: 0 auto; }
+        .left-panel { flex: 1; display: flex; flex-direction: column; }
+        .right-panel { flex: 1.3; display: flex; flex-direction: column; }
+        .section-title { font-size: 22px; margin-bottom: 20px; color: #1a1a1a; font-weight: 700; }
+
+        /* ইনপুট গ্রুপ ও বাটন */
+        .input-group { display: flex; align-items: center; border: 2px solid #e1e4e8; border-radius: 8px; overflow: hidden; background: #fff; transition: border-color 0.3s; margin-bottom: 8px; }
+        .input-group:focus-within { border-color: #007bff; }
+        .input-group input { flex: 1; padding: 12px 15px; border: none; outline: none; font-size: 15px; background: transparent; }
+        .domain-select { background-color: #f8f9fa; padding: 12px 10px; color: #495057; font-size: 14px; font-weight: 600; border: none; border-left: 2px solid #e1e4e8; outline: none; cursor: pointer; }
+
+        /* স্ট্যাটাস মেসেজ */
+        .status-msg { font-size: 13px; font-weight: 600; margin-bottom: 15px; min-height: 18px; opacity: 0; text-align: left; transition: all 0.3s; }
+        .status-available { color: #28a745; opacity: 1; }
+        .status-taken { color: #dc3545; opacity: 1; }
+        .status-checking { color: #007bff; opacity: 1; }
+        
+        .primary-btn { background-color: #007bff; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: 600; width: 100%; transition: background 0.3s; }
+        .primary-btn:hover { background-color: #0056b3; }
+        .primary-btn:disabled { background-color: #a5cfff; cursor: not-allowed; }
+        .primary-btn.small { width: auto; }
+
+        /* ডোমেইন লিস্ট */
+        .domain-list-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border: 1px solid #e1e4e8; border-radius: 8px; margin-bottom: 10px; background: #fafbfc; transition: 0.2s; }
+        .domain-list-item:hover { border-color: #007bff; }
+        .domain-name { font-size: 15px; font-weight: 600; color: #333; }
+        .default-badge { background: #28a745; color: white; padding: 3px 8px; border-radius: 20px; font-size: 11px; font-weight: bold; margin-left: 8px; }
+        .action-btns { display: flex; gap: 8px; }
+        .set-default-btn { background: #f1f3f5; color: #495057; border: 1px solid #ced4da; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600; transition: 0.3s; }
+        .set-default-btn:hover { background: #e2e6ea; color: #007bff; border-color: #007bff; }
+        .remove-btn { background: #fff0f0; color: #dc3545; border: 1px solid #ffcaca; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: 600; transition: 0.3s; }
+        .remove-btn:hover { background: #ffe0e0; border-color: #ff9e9e; }
+        .add-domain-box { display: flex; gap: 10px; margin-top: 20px; padding-top: 20px; border-top: 2px dashed #e1e4e8; }
+        .add-domain-box input { flex: 1; padding: 10px 14px; border: 2px solid #e1e4e8; border-radius: 8px; outline: none; font-size: 14px; }
+        .add-domain-box input:focus { border-color: #007bff; }
+
+        /* রেজাল্ট ও ইনবক্স */
+        #workspace { display: none; }
+        .result-container { display: flex; align-items: center; border: 2px solid #28a745; border-radius: 8px; overflow: hidden; margin-bottom: 15px; }
+        .result-container input { flex: 1; padding: 12px 15px; border: none; font-size: 15px; background-color: #eafbf0; color: #126b2b; font-weight: 600; outline: none; }
+        .copy-btn { background-color: #28a745; color: white; border: none; padding: 12px 20px; cursor: pointer; font-weight: 600; font-size: 15px; }
+        .inbox-wrapper { border: 1px solid #e1e4e8; border-radius: 10px; background: #fafbfc; min-height: 280px; display: flex; flex-direction: column; }
+        .inbox-header { background: #f1f3f5; padding: 12px 16px; border-bottom: 1px solid #e1e4e8; display: flex; justify-content: space-between; align-items: center; }
+        .inbox-content { padding: 25px; text-align: center; color: #6c757d; flex: 1; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+        .reset-btn { background-color: #f1f3f5; color: #495057; border: 1px solid #ced4da; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; width: 100%; margin-top: auto; }
+
+        /* ফুটার */
+        .footer { text-align: center; padding: 15px; font-size: 13px; color: #6c757d; margin-top: auto; }
+        .footer a { color: #6c757d; text-decoration: none; margin: 0 10px; }
+        .footer a:hover { color: #007bff; }
+
+        @media (max-width: 768px) { .container { flex-direction: column; gap: 20px; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a id="nav-home" class="active" onclick="switchPage('home')">Home</a>
+        <a id="nav-domains" onclick="switchPage('domains')">Domains</a>
+        <a href="#">Pricing</a>
+        <a href="#">API</a>
+        <a href="#">More ▼</a>
+    </nav>
+
+    <!-- হোম পেজ ভিউ -->
+    <div id="page-home" class="page-view active">
+        <header class="hero">
+            <div class="badge"><span style="color: #ff6b00;">✨</span> Multi Mail</div>
+            <h1>Best Temporary Email</h1>
+            <p>Create custom domain temp mail and send test emails instantly.</p>
+        </header>
+
+        <main class="main-wrapper">
+            <div class="container">
+                <div class="left-panel">
+                    <h2 class="section-title">Mail Generator</h2>
+                    
+                    <div id="inputSection">
+                        <div class="input-group" id="inputGroup">
+                            <input type="text" id="nameInput" placeholder="Type name (e.g. Alex Jack)">
+                            <select id="domainSelect" class="domain-select" onchange="checkAvailability()"></select>
+                        </div>
+                        
+                        <!-- রিয়েল-টাইম স্ট্যাটাস মেসেজ -->
+                        <div id="availabilityStatus" class="status-msg"></div>
+                        
+                        <button class="primary-btn" id="createMailBtn" onclick="createMail()">Create mail</button>
+                    </div>
+
+                    <div id="workspace">
+                        <div class="result-container">
+                            <input type="text" id="generatedMail" readonly>
+                            <button class="copy-btn" onclick="copyMail(this)">Copy</button>
+                        </div>
+                        <button class="reset-btn" onclick="resetMail()">+ Create New Mail</button>
+                    </div>
+                </div>
+
+                <div class="right-panel">
+                    <div class="inbox-wrapper">
+                        <div class="inbox-header">
+                            <h3><span style="font-size: 16px; color: #333; margin: 0;">Inbox</span></h3>
+                            <button class="set-default-btn" style="border:none; background:none; color:#007bff; font-size:14px;" onclick="reloadInbox()">↻ Reload</button>
+                        </div>
+                        <div class="inbox-content" id="inboxContent">
+                            Generate an email to view inbox...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ডোমেইন পেজ ভিউ -->
+    <div id="page-domains" class="page-view">
+        <header class="hero">
+            <h1>Manage Domains</h1>
+            <p>Add, remove or set your default extension for temporary emails.</p>
+        </header>
+
+        <main class="main-wrapper">
+            <div class="container domain-container">
+                <h2 class="section-title">Available Extensions</h2>
+                <div id="domainListContainer"></div>
+                <div class="add-domain-box">
+                    <input type="text" id="newDomainInput" placeholder="New extension (e.g. @mycompany.com)">
+                    <button class="primary-btn small" onclick="addNewDomain()">Add Domain</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <a href="#">Privacy Policy</a> • <a href="#">Terms of Service</a> • <a href="#">Contact Us</a>
+        <br><br>&copy; 2026 Xeramail. All rights reserved.
+    </footer>
+
+    <script>
+        // ==========================================
+        // ১. FIREBASE CONFIGURATION (ডেটাবেস সেটআপ)
+        // ==========================================
+        // আপনার Firebase প্রজেক্ট থেকে API Key এবং ডেটাবেস URL এখানে বসিয়ে দিন
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+        
+        // Firebase ইনিশিয়ালাইজ করা
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        // Firebase-এ মেইল সেভ করার জন্য (.) ডট রিমুভ করতে হয়। 
+        // কারণ Firebase Key-তে ডট সাপোর্ট করে না।
+        function encodeEmailForFirebase(email) {
+            return email.replace(/\./g, '_dot_');
+        }
+
+        // ==========================================
+        // ২. DOMAIN MANAGEMENT (লোকাল স্টোরেজ)
+        // ডোমেইন সেটিংস গুলো ইউজারের ব্যক্তিগত, তাই এগুলো লোকালই থাকবে
+        // ==========================================
+        const initialDomains = ['@xeramail.com', '@gmail.com', '@outlook.com', '@yahoo.com', '@mail.ee'];
+        let domains = JSON.parse(localStorage.getItem('savedDomains')) || initialDomains;
+        let defaultDomain = localStorage.getItem('defaultDomain') || '@xeramail.com';
+
+        function saveToLocalStorage() {
+            localStorage.setItem('savedDomains', JSON.stringify(domains));
+            localStorage.setItem('defaultDomain', defaultDomain);
+        }
+
+        window.onload = () => {
+            if (!domains.includes(defaultDomain) && domains.length > 0) defaultDomain = domains[0];
+            renderDomains();
+        };
+
+        function renderDomains() {
+            const domainSelect = document.getElementById('domainSelect');
+            const listContainer = document.getElementById('domainListContainer');
+            domainSelect.innerHTML = '';
+            listContainer.innerHTML = '';
+
+            domains.forEach(domain => {
+                let option = document.createElement('option');
+                option.value = domain;
+                option.textContent = domain;
+                if (domain === defaultDomain) option.selected = true;
+                domainSelect.appendChild(option);
+
+                let isDefault = (domain === defaultDomain);
+                listContainer.innerHTML += `
+                    <div class="domain-list-item">
+                        <div class="domain-name">${domain} ${isDefault ? '<span class="default-badge">Default</span>' : ''}</div>
+                        <div class="action-btns">
+                            ${!isDefault ? `<button class="set-default-btn" onclick="setDefaultDomain('${domain}')">Set Default</button>` : ''}
+                            <button class="remove-btn" onclick="removeDomain('${domain}')">Remove</button>
+                        </div>
+                    </div>
+                `;
+            });
+            saveToLocalStorage();
+            checkAvailability(); 
+        }
+
+        function addNewDomain() {
+            let input = document.getElementById('newDomainInput');
+            let newDomain = input.value.trim().toLowerCase();
+            if (newDomain === '') { alert("Please enter a valid domain name!"); return; }
+            if (!newDomain.startsWith('@')) { newDomain = '@' + newDomain; }
+
+            if (domains.includes(newDomain)) {
+                alert("This domain is already in the list!");
+            } else {
+                domains.push(newDomain);
+                defaultDomain = newDomain; 
+                renderDomains(); 
+                input.value = ''; 
+            }
+        }
+
+        function setDefaultDomain(domain) { defaultDomain = domain; renderDomains(); }
+        function removeDomain(domain) {
+            if (domains.length === 1) { alert("You cannot delete the last domain! At least one extension is required."); return; }
+            if (confirm(`Are you sure you want to remove ${domain}?`)) {
+                domains = domains.filter(d => d !== domain);
+                if (defaultDomain === domain) defaultDomain = domains[0];
+                renderDomains();
+            }
+        }
+
+        function switchPage(page) {
+            document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.navbar a').forEach(el => el.classList.remove('active'));
+            document.getElementById('page-' + page).classList.add('active');
+            document.getElementById('nav-' + page).classList.add('active');
+        }
+
+        // ==========================================
+        // ৩. MAIL GENERATOR (FIREBASE DATABASE)
+        // ==========================================
+        const nameInput = document.getElementById('nameInput');
+        const generatedMail = document.getElementById('generatedMail');
+        const workspace = document.getElementById('workspace');
+        const inputSection = document.getElementById('inputSection');
+        const inboxContent = document.getElementById('inboxContent');
+        const availabilityStatus = document.getElementById('availabilityStatus');
+        const createMailBtn = document.getElementById('createMailBtn');
+
+        let checkTimeout; // টাইপিং শেষ করার পর চেকিং করার জন্য
+
+        function checkAvailability() {
+            let name = nameInput.value.trim();
+            if (name === '') {
+                availabilityStatus.className = 'status-msg'; 
+                availabilityStatus.textContent = '';
+                createMailBtn.disabled = false;
+                return;
+            }
+            
+            let fullEmail = name + document.getElementById('domainSelect').value;
+            let encodedEmail = encodeEmailForFirebase(fullEmail);
+            
+            // Checking... মেসেজ শো করা
+            availabilityStatus.textContent = "Checking availability...";
+            availabilityStatus.className = "status-msg status-checking";
+            createMailBtn.disabled = true;
+
+            clearTimeout(checkTimeout);
+            
+            // টাইপিং বন্ধ করার ৩০০ মিলি-সেকেন্ড পর ডেটাবেসে কল যাবে (যাতে স্প্যামিং না হয়)
+            checkTimeout = setTimeout(() => {
+                database.ref('registered_emails/' + encodedEmail).once('value')
+                .then((snapshot) => {
+                    if (snapshot.exists()) {
+                        availabilityStatus.textContent = "This username is taken";
+                        availabilityStatus.className = "status-msg status-taken";
+                        createMailBtn.disabled = true; 
+                    } else {
+                        availabilityStatus.textContent = "This username is Available";
+                        availabilityStatus.className = "status-msg status-available";
+                        createMailBtn.disabled = false; 
+                    }
+                }).catch((error) => {
+                    console.error("Firebase Error:", error);
+                    availabilityStatus.textContent = "Error checking database. Check rules.";
+                    availabilityStatus.className = "status-msg status-taken";
+                });
+            }, 300);
+        }
+
+        nameInput.addEventListener('input', function() {
+            this.value = this.value.replace(/\s+/g, '').toLowerCase();
+            checkAvailability();
+        });
+
+        function createMail() {
+            let name = nameInput.value.trim();
+            if (name === '') {
+                alert("Please enter a name to generate mail!");
+                return;
+            }
+            
+            createMailBtn.disabled = true;
+            createMailBtn.innerText = "Creating...";
+
+            const fullEmail = name + document.getElementById('domainSelect').value;
+            let encodedEmail = encodeEmailForFirebase(fullEmail);
+
+            // পুনরায় একবার চেক করে তারপর ডেটাবেসে সেভ করা হবে
+            database.ref('registered_emails/' + encodedEmail).once('value')
+            .then((snapshot) => {
+                if (snapshot.exists()) {
+                    alert("Someone just registered this email! Please try another.");
+                    createMailBtn.innerText = "Create mail";
+                    checkAvailability();
+                } else {
+                    // Firebase ডেটাবেসে মেইলটি সেভ করা
+                    database.ref('registered_emails/' + encodedEmail).set({
+                        createdAt: firebase.database.ServerValue.TIMESTAMP
+                    }).then(() => {
+                        generatedMail.value = fullEmail;
+                        workspace.style.display = 'block';
+                        inputSection.style.display = 'none';
+                        inboxContent.innerHTML = "Waiting for incoming emails...";
+                        
+                        nameInput.value = '';
+                        createMailBtn.innerText = "Create mail";
+                        checkAvailability();
+                    });
+                }
+            });
+        }
+
+        function copyMail(btn) {
+            generatedMail.select();
+            generatedMail.setSelectionRange(0, 99999); 
+            navigator.clipboard.writeText(generatedMail.value).then(() => {
+                let originalText = btn.innerText;
+                btn.innerText = "Copied!";
+                btn.style.backgroundColor = "#1e7e34";
+                setTimeout(() => { btn.innerText = originalText; btn.style.backgroundColor = "#28a745"; }, 2000);
+            });
+        }
+
+        function reloadInbox() {
+            if (workspace.style.display !== 'block') {
+                alert("Please create an email first to reload inbox!");
+                return;
+            }
+            inboxContent.innerHTML = "Checking for new emails...";
+            inboxContent.style.color = "#007bff";
+            setTimeout(() => {
+                inboxContent.style.color = "#6c757d";
+                inboxContent.innerHTML = "Your inbox is empty. No new emails found.";
+            }, 1500);
+        }
+
+        function resetMail() {
+            workspace.style.display = 'none';
+            inputSection.style.display = 'block';
+            inboxContent.innerHTML = "Generate an email to view inbox...";
+            nameInput.focus();
+        }
+    </script>
+</body>
+</html>
