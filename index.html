@@ -2329,7 +2329,7 @@ Security Team</textarea>
         }
 
         function formatEmailHandle(rawName) {
-            return rawName.trim().replace(/\s+/g, '').toLowerCase();
+            return String(rawName || '').toLowerCase().replace(/[^a-z0-9]/g, '');
         }
 
         // ==========================================
@@ -2584,10 +2584,11 @@ Security Team</textarea>
         let savedMailNames = safeGetStorage('multimail_saved_names_v2', {});
         let activeEmail = safeGetStorage('multimail_active_email_v2', '');
         let checkTimeout = null;
+        let currentRawName = '';
+        let prevCleanValue = '';
 
         function checkAvailability() {
-            const rawInput = nameInput.value;
-            const handle = formatEmailHandle(rawInput);
+            const handle = formatEmailHandle(nameInput.value);
 
             if (!handle) {
                 availabilityStatus.className = 'status-msg';
@@ -2632,18 +2633,63 @@ Security Team</textarea>
             }, 260);
         }
 
-        // Preserve exact user input (uppercase, spaces, etc.) in both #nameInput and #enteredNameDisplay
+        // Handle paste directly so exact pasted string is shown in #enteredNameDisplay and clean username in #nameInput
+        nameInput.addEventListener('paste', function(e) {
+            e.preventDefault();
+            const pasted = (e.clipboardData || window.clipboardData).getData('text') || '';
+            if (this.selectionStart === 0 && this.selectionEnd === this.value.length) {
+                currentRawName = pasted;
+            } else {
+                currentRawName += pasted;
+            }
+            const clean = formatEmailHandle(currentRawName);
+            this.value = clean;
+            prevCleanValue = clean;
+            enteredNameDisplay.value = currentRawName;
+            checkAvailability();
+        });
+
+        // Format #nameInput as a clean username (no spaces, commas, or capital letters) while keeping exact input in #enteredNameDisplay
         nameInput.addEventListener('input', function() {
-            enteredNameDisplay.value = this.value;
+            const rawVal = this.value;
+            if (!rawVal) {
+                currentRawName = '';
+                prevCleanValue = '';
+                this.value = '';
+                enteredNameDisplay.value = '';
+                checkAvailability();
+                return;
+            }
+
+            if (rawVal.startsWith(prevCleanValue) && rawVal.length >= prevCleanValue.length) {
+                const addedRaw = rawVal.slice(prevCleanValue.length);
+                currentRawName += addedRaw;
+            } else if (prevCleanValue.startsWith(rawVal)) {
+                // User deleted characters with Backspace
+                while (currentRawName.length > 0 && formatEmailHandle(currentRawName).length > rawVal.length) {
+                    currentRawName = currentRawName.slice(0, -1);
+                }
+                // Also strip trailing spaces/commas when backspacing
+                currentRawName = currentRawName.replace(/[\s,]+$/, '');
+            } else {
+                currentRawName = rawVal;
+            }
+
+            const clean = formatEmailHandle(currentRawName);
+            this.value = clean;
+            prevCleanValue = clean;
+            enteredNameDisplay.value = currentRawName;
             checkAvailability();
         });
 
         function fillRandomUsername(autoCreate = false) {
             const firsts = ['Alex', 'Rafi', 'Nova', 'Tawsif', 'Zara', 'Liam', 'Orion', 'Kairo', 'Sarah', 'Nabil'];
-            const seconds = ['Jack', 'Ahamed', 'Carter', 'Studio', 'Prime', 'Vance', 'walker', 'Khan'];
+            const seconds = ['Jack', 'Ahamed', 'Carter', 'Studio', 'Prime', 'Vance', 'Walker', 'Khan'];
             const num = Math.floor(10 + Math.random() * 89);
             const rawAlias = `${firsts[Math.floor(Math.random() * firsts.length)]} ${seconds[Math.floor(Math.random() * seconds.length)]} ${num}`;
-            nameInput.value = rawAlias;
+            currentRawName = rawAlias;
+            prevCleanValue = formatEmailHandle(rawAlias);
+            nameInput.value = prevCleanValue;
             enteredNameDisplay.value = rawAlias;
 
             if (autoCreate) {
@@ -2655,8 +2701,8 @@ Security Team</textarea>
         }
 
         function createMail(skipFirebaseCheck = false) {
-            const rawName = nameInput.value; // Exact string with uppercase & spaces preserved
-            const handle = formatEmailHandle(rawName);
+            const rawName = currentRawName || enteredNameDisplay.value || nameInput.value;
+            const handle = formatEmailHandle(nameInput.value || rawName);
 
             if (!handle) {
                 showToast('Please enter a name first!', 'warning');
@@ -2684,6 +2730,8 @@ Security Team</textarea>
                 enteredNameDisplay.value = rawName;
                 setActiveEmail(fullEmail);
                 nameInput.value = '';
+                currentRawName = '';
+                prevCleanValue = '';
                 createMailBtn.innerHTML = '<i class="fa-solid fa-plus"></i> Create Mail Address';
                 createMailBtn.disabled = false;
                 availabilityStatus.innerHTML = '';
