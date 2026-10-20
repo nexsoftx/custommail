@@ -2196,6 +2196,451 @@
                 display: none;
             }
         }
+    
+        /* ==========================================
+           15. DUAL-MODE DOMAINS, RECOVER EMAIL & BACK BUTTONS
+           ========================================== */
+        .page-top-bar {
+            max-width: 1280px;
+            margin: 18px auto 0;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+
+        .back-home-btn {
+            background: var(--bg-surface);
+            color: var(--text-main);
+            border: 1.5px solid var(--border-strong);
+            padding: 8px 15px;
+            border-radius: var(--radius-sm);
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .back-home-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--primary-soft);
+            transform: translateX(-2px);
+        }
+
+        .recover-header-btn {
+            background: var(--primary-soft);
+            color: var(--primary);
+            border: 1.5px solid var(--primary-border);
+            height: 34px;
+            padding: 0 13px;
+            border-radius: var(--radius-sm);
+            font-size: 12.5px;
+            font-weight: 700;
+            line-height: 1;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+
+        .recover-header-btn:hover,
+        .recover-header-btn.active-mode {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+            box-shadow: 0 3px 10px rgba(91, 78, 255, 0.28);
+        }
+
+        .mode-pill-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 3px 9px;
+            border-radius: var(--radius-xs);
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .mode-pill-tag.real {
+            background: var(--success-soft);
+            color: var(--success);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+        }
+
+        .mode-pill-tag.demo {
+            background: var(--warning-soft);
+            color: var(--warning);
+            border: 1px solid rgba(245, 158, 11, 0.35);
+        }
+
+        /* Recover Email Card View inside Generator Box */
+        #recoverEmailSection {
+            display: none;
+            flex-direction: column;
+            gap: 14px;
+            flex: 1;
+            animation: fadeIn 0.22s ease-out;
+        }
+
+        .recover-hero-banner {
+            background: linear-gradient(135deg, rgba(91, 78, 255, 0.12), rgba(16, 185, 129, 0.08));
+            border: 1px solid var(--primary-border);
+            border-radius: var(--radius-sm);
+            padding: 14px 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .recover-hero-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: var(--radius-sm);
+            background: var(--primary);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .recover-hero-text h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 3px;
+        }
+
+        .recover-hero-text p {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.45;
+        }
+
+        /* Recovery Kit Display Box inside Active Workspace */
+        .recovery-kit-card {
+            background: var(--bg-subtle);
+            border: 1.5px dashed var(--primary-border);
+            border-radius: var(--radius-sm);
+            padding: 12px 14px;
+            margin-bottom: 10px;
+        }
+
+        .recovery-kit-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 11.5px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        .recovery-kit-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .recovery-kit-input {
+            flex: 1;
+            min-width: 0;
+            background: var(--bg-surface);
+            border: 1.5px solid var(--border-strong);
+            padding: 8px 11px;
+            border-radius: var(--radius-xs);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-main);
+            outline: none;
+        }
+
+        /* Dual-Box Domains Page Layout (Full 1280px Width like Home Page) */
+        .domains-mode-selector-bar {
+            width: 100%;
+            margin: 0 auto 20px;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 16px 20px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .mode-switch-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            flex: 1;
+            min-width: 320px;
+        }
+
+        .mode-select-card {
+            border: 2px solid var(--border-strong);
+            background: var(--bg-subtle);
+            border-radius: var(--radius-sm);
+            padding: 13px 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .mode-select-card:hover {
+            border-color: var(--primary);
+            background: var(--bg-surface);
+        }
+
+        .mode-select-card.selected-mode {
+            border-color: var(--primary);
+            background: var(--primary-soft);
+            box-shadow: 0 4px 14px rgba(91, 78, 255, 0.14);
+        }
+
+        .mode-select-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+        }
+
+        .mode-radio-circle {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 2px solid var(--border-strong);
+            background: var(--bg-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: transparent;
+            font-size: 11px;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .mode-select-card.selected-mode .mode-radio-circle {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #ffffff;
+        }
+
+        .domains-dual-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            width: 100%;
+            margin: 0 auto;
+            align-items: stretch;
+        }
+
+        .domain-mode-box {
+            display: flex;
+            flex-direction: column;
+            border: 2px solid var(--border-color);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            min-width: 0;
+        }
+
+        .domain-mode-box.active-domain-box {
+            border-color: var(--primary);
+            box-shadow: 0 8px 26px rgba(91, 78, 255, 0.12);
+        }
+
+        .domain-box-top-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding-bottom: 12px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            flex-wrap: nowrap;
+        }
+
+        .domain-box-title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 0;
+            white-space: nowrap;
+        }
+
+        .domain-box-actions-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .domain-box-subbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            padding: 7px 11px;
+            background: var(--bg-subtle);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xs);
+            margin-bottom: 12px;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .box-select-toggle {
+            background: var(--bg-subtle);
+            color: var(--text-secondary);
+            border: 1.5px solid var(--border-strong);
+            height: 34px;
+            padding: 0 12px;
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            transition: all 0.2s ease;
+        }
+
+        .box-select-toggle:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .box-select-toggle.selected {
+            background: var(--success);
+            color: #ffffff;
+            border-color: var(--success);
+        }
+
+        .compact-hdr-btn {
+            height: 34px;
+            padding: 0 11px;
+            font-size: 12px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        /* Prevent domain list items and buttons from wrapping onto 2 lines */
+        .domain-grid-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            max-height: 420px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .domain-list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            background: var(--bg-subtle);
+            transition: all 0.2s ease;
+            gap: 8px;
+            min-width: 0;
+        }
+
+        .domain-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            min-width: 0;
+            flex: 1;
+        }
+
+        .domain-name > span:first-child {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .default-badge {
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .action-btns {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-shrink: 0;
+        }
+
+        .set-default-btn {
+            white-space: nowrap;
+            flex-shrink: 0;
+            padding: 5px 9px;
+            font-size: 11.5px;
+            line-height: 1.2;
+        }
+
+        .remove-btn {
+            white-space: nowrap;
+            flex-shrink: 0;
+            padding: 5px 8px;
+        }
+
+        @media (max-width: 1160px) {
+            .domains-dual-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .mode-switch-options {
+                grid-template-columns: 1fr;
+            }
+            .page-top-bar {
+                padding: 0 16px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .domain-grid-list {
+                grid-template-columns: 1fr;
+            }
+            .domain-box-top-header {
+                flex-wrap: wrap;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -2259,15 +2704,20 @@
             <div class="home-grid">
                 <!-- Left Box: Mail Generator (Equal Height with Inbox) -->
                 <div class="card-box">
-                    <div class="card-header-row">
-                        <h2 class="section-title"><i class="fa-solid fa-at"></i> Mail Generator</h2>
-                        <span style="font-size: 11.5px; color: var(--text-muted); font-weight: 600;" id="defaultDomainIndicator">Default: @gmail.com</span>
+                    <div class="card-header-row" style="flex-wrap: nowrap; gap: 10px;">
+                        <h2 class="section-title" id="generatorCardTitle" style="white-space: nowrap; margin: 0;"><i class="fa-solid fa-at"></i> Mail Generator</h2>
+                        <button type="button" class="recover-header-btn" id="recoverToggleBtn" onclick="toggleRecoverEmailView()">
+                            <i class="fa-solid fa-key"></i> <span id="recoverToggleBtnText">Recover Email</span>
+                        </button>
                     </div>
 
                     <div id="inputSection">
-                        <div class="field-label">
-                            <span>Enter Name & Select Domain</span>
-                            <button type="button" class="quick-link-btn" onclick="fillRandomUsername()">
+                        <div class="field-label" style="gap: 8px;">
+                            <span style="display: inline-flex; align-items: center; gap: 6px;">
+                                <span>Enter Name &amp; Domain</span>
+                                <span class="mode-pill-tag real" id="homeActiveModeBadge" onclick="switchPage('domains')" style="cursor: pointer; font-size: 10px; padding: 2px 7px;" title="Click to switch between Real-Time & Demo mode"><i class="fa-solid fa-satellite-dish"></i> Real-Time</span>
+                            </span>
+                            <button type="button" class="quick-link-btn" onclick="fillRandomUsername()" style="white-space: nowrap;">
                                 <i class="fa-solid fa-dice"></i> Random Alias
                             </button>
                         </div>
@@ -2344,6 +2794,22 @@
                             </div>
                         </div>
 
+                        <!-- Recovery Kit Box for Later Access -->
+                        <div class="recovery-kit-card" id="recoveryKitCard">
+                            <div class="recovery-kit-header">
+                                <span><i class="fa-solid fa-shield-keyhole"></i> Recovery Kit (Save for Later Access)</span>
+                                <button type="button" class="quick-link-btn" onclick="downloadRecoveryKitTxt()" title="Download Email & Recovery Kit as .TXT">
+                                    <i class="fa-solid fa-download"></i> Save Kit
+                                </button>
+                            </div>
+                            <div class="recovery-kit-row">
+                                <input type="text" id="activeRecoveryKitInput" class="recovery-kit-input mono" readonly placeholder="MMK-XXXX-XXXX">
+                                <button type="button" class="secondary-btn" style="padding: 8px 12px;" onclick="copyActiveRecoveryKit()" title="Copy Recovery Kit">
+                                    <i class="fa-regular fa-copy"></i> Copy Kit
+                                </button>
+                            </div>
+                        </div>
+
                         <div class="workspace-actions">
                             <button class="secondary-btn" onclick="resetMail()" title="Create another email address">
                                 <i class="fa-solid fa-plus"></i> New Mail
@@ -2357,8 +2823,48 @@
                         </div>
                     </div>
 
+                    <!-- Recover Email View (Shown when "Recover Email" button is clicked) -->
+                    <div id="recoverEmailSection">
+                        <div class="recover-hero-banner">
+                            <div class="recover-hero-icon"><i class="fa-solid fa-unlock-keyhole"></i></div>
+                            <div class="recover-hero-text">
+                                <h4>Recover &amp; Re-Access Existing Inbox</h4>
+                                <p>Enter your previously generated <strong>Email Address</strong> and <strong>Recovery Kit</strong> to restore your live inbox and incoming messages anytime.</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="field-label">
+                                <span><i class="fa-regular fa-envelope" style="color: var(--primary);"></i> Email Address</span>
+                            </div>
+                            <input type="email" id="recoverEmailInput" class="std-input mono" placeholder="e.g. alex.jack@domain.com" style="margin-bottom: 10px;" autocomplete="off">
+
+                            <div class="field-label">
+                                <span><i class="fa-solid fa-key" style="color: var(--primary);"></i> Recovery Kit Key</span>
+                                <button type="button" class="quick-link-btn" onclick="pasteRecoveryKitFromClipboard()">
+                                    <i class="fa-regular fa-paste"></i> Paste Kit
+                                </button>
+                            </div>
+                            <input type="text" id="recoverKitInput" class="std-input mono" placeholder="e.g. MMK-8F4A-92C1" style="margin-bottom: 6px;" autocomplete="off">
+                            <div id="recoverStatusMsg" class="status-msg" style="margin: 4px 0 10px;"></div>
+
+                            <button type="button" class="primary-btn" id="recoverSubmitBtn" onclick="recoverEmailWithKit()">
+                                <i class="fa-solid fa-bolt"></i> Access Inbox Now
+                            </button>
+                            <button type="button" class="secondary-btn" style="width: 100%; margin-top: 8px;" onclick="toggleRecoverEmailView(false)">
+                                <i class="fa-solid fa-arrow-left"></i> Back to Mail Generator
+                            </button>
+                        </div>
+
+                        <div class="helper-box push-bottom" style="margin-top: auto;">
+                            <div style="font-size: 12px; color: var(--text-secondary); line-height: 1.5;">
+                                <i class="fa-solid fa-circle-info" style="color: var(--primary);"></i> <strong>Tip:</strong> Works for both <strong>Real-Time API Mails</strong> (authenticates directly with live mail server) and <strong>Demo Mails</strong>. You can also click any saved address in <em>My Generated Mails</em> below to autofill its kit.
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Entered Name Display & Copy Box (Preserves exact uppercase, spaces, etc.) -->
-                    <div class="helper-box push-bottom">
+                    <div class="helper-box push-bottom" id="helperNameBox">
                         <div class="field-label" style="margin-bottom: 0;">
                             <span><i class="fa-regular fa-user" style="color: var(--primary);"></i> Entered Name (Exact Case & Spaces)</span>
                             <button type="button" class="quick-link-btn" onclick="copyEnteredName()">
@@ -2374,7 +2880,7 @@
                     </div>
 
                     <!-- Built-in Custom & Generated Password Helper -->
-                    <div class="helper-box">
+                    <div class="helper-box" id="helperPwdBox">
                         <div class="field-label" style="margin-bottom: 0;">
                             <span><i class="fa-solid fa-key" style="color: var(--primary);"></i> Signup Password Helper (Custom / Auto)</span>
                             <button type="button" class="quick-link-btn" onclick="generateStrongPassword()">
@@ -2401,7 +2907,7 @@
                         <div class="inbox-toolbar">
                             <div class="auto-refresh-pill">
                                 <i class="fa-solid fa-clock-rotate-left"></i>
-                                <span>Auto-sync: <strong id="refreshCountdown">10s</strong></span>
+                                <span>Auto-sync: <strong id="refreshCountdown">5s</strong></span>
                             </div>
                             <button class="secondary-btn" onclick="openTestEmailModal()">
                                 <i class="fa-solid fa-envelope-circle-check"></i> Simulate OTP Mail
@@ -2583,29 +3089,117 @@
          2. DOMAINS MANAGEMENT PAGE VIEW
          ========================================== -->
     <div id="page-domains" class="page-view">
+        <div class="page-top-bar">
+            <button type="button" class="back-home-btn" onclick="switchPage('home')">
+                <i class="fa-solid fa-arrow-left"></i> Back to Home
+            </button>
+            <span class="mode-pill-tag real" id="domainsPageActiveBadge">Active Mode: Real-Time API</span>
+        </div>
         <header class="hero">
-            <div class="badge"><i class="fa-solid fa-globe"></i> Domain Registry</div>
-            <h1>Manage <span>Email Extensions</span></h1>
-            <p>Set any domain as Default to automatically update the Home generator, or add your own custom domain extension.</p>
+            <div class="badge"><i class="fa-solid fa-globe"></i> Dual-Engine Domain Registry</div>
+            <h1>Select Mode &amp; <span>Domain Extensions</span></h1>
+            <p>Choose between <strong>Real-Time Live API Domains</strong> (receives real external verification emails) or <strong>Demo Mode Domains</strong> (15+ classic extensions). Selecting one automatically deselects the other.</p>
         </header>
         <main class="main-wrapper">
-            <div class="card-box domain-container">
-                <div class="card-header-row">
-                    <h2 class="section-title"><i class="fa-solid fa-server"></i> Available Extensions (<span id="domainCountLabel">15</span>)</h2>
-                    <button class="secondary-btn" onclick="resetDomainsToDefaultList()" title="Restore the official 15 domains">
-                        <i class="fa-solid fa-rotate-left"></i> Reset 15 Domains
-                    </button>
+            <!-- Top Mode Selector Bar (Mutually Exclusive: Real vs Demo) -->
+            <div class="domains-mode-selector-bar">
+                <div style="font-size: 13.5px; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-sliders" style="color: var(--primary);"></i>
+                    <span>Select Active Generator Mode:</span>
+                </div>
+                <div class="mode-switch-options">
+                    <div class="mode-select-card selected-mode" id="modeCardReal" onclick="setDomainMode('real')">
+                        <div class="mode-select-left">
+                            <div class="mode-radio-circle"><i class="fa-solid fa-check"></i></div>
+                            <div>
+                                <div style="font-size: 13.5px; font-weight: 700; color: var(--text-main);">Real-Time API Domains (Live Mail)</div>
+                                <div style="font-size: 11.5px; color: var(--text-muted);">Receives real external emails &amp; generates Recovery Kit</div>
+                            </div>
+                        </div>
+                        <span class="mode-pill-tag real">LIVE</span>
+                    </div>
+
+                    <div class="mode-select-card" id="modeCardDemo" onclick="setDomainMode('demo')">
+                        <div class="mode-select-left">
+                            <div class="mode-radio-circle"><i class="fa-solid fa-check"></i></div>
+                            <div>
+                                <div style="font-size: 13.5px; font-weight: 700; color: var(--text-main);">Demo Domains (15+ Classic Extensions)</div>
+                                <div style="font-size: 11.5px; color: var(--text-muted);">Simulated instant OTP &amp; custom domain sandbox</div>
+                            </div>
+                        </div>
+                        <span class="mode-pill-tag demo">DEMO</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dual Boxes: Left = Real-Time API Domains, Right = Demo Domains -->
+            <div class="domains-dual-grid">
+                <!-- LEFT BOX: REAL-TIME API DOMAINS -->
+                <div class="card-box domain-mode-box active-domain-box" id="realDomainBoxCard">
+                    <div class="domain-box-top-header">
+                        <div class="domain-box-title-wrap">
+                            <h2 class="section-title" style="margin: 0; white-space: nowrap;"><i class="fa-solid fa-satellite-dish"></i> Real-Time Domains</h2>
+                            <span class="inbox-count-badge" id="realDomainCountLabel">0</span>
+                        </div>
+                        <div class="domain-box-actions-wrap">
+                            <button type="button" class="secondary-btn compact-hdr-btn" onclick="fetchRealtimeDomainsFromApi(true)" title="Sync live domains from Mail.tm, Mail.gw & Maildrop">
+                                <i class="fa-solid fa-rotate" id="realDomainsSyncIcon"></i> Sync Live
+                            </button>
+                            <button type="button" class="box-select-toggle selected" id="selectRealBoxBtn" onclick="setDomainMode('real')">
+                                <i class="fa-solid fa-circle-check"></i> <span id="selectRealBoxBtnText">Selected</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="domain-box-subbar">
+                        <span id="realDefaultDomainIndicator" style="font-weight: 600; color: var(--text-main);">Default: Loading...</span>
+                        <span class="mono" id="realApiHealthLabel" style="color: var(--success); font-weight: 700;"><i class="fa-solid fa-circle-check"></i> Live MX Ready</span>
+                    </div>
+
+                    <div class="domain-toolbar">
+                        <input type="text" id="realDomainSearchInput" class="domain-search-input" placeholder="Search live real-time domain..." oninput="renderDomains()">
+                    </div>
+
+                    <div class="domain-grid-list" id="realDomainListContainer"></div>
+
+                    <div class="add-domain-box">
+                        <input type="text" id="newRealDomainInput" placeholder="Add live domain (e.g. @any.pink, @pokemail.net)">
+                        <button class="primary-btn small" onclick="addNewRealDomain()" style="white-space: nowrap;"><i class="fa-solid fa-plus"></i> Add Live Domain</button>
+                    </div>
                 </div>
 
-                <div class="domain-toolbar">
-                    <input type="text" id="domainSearchInput" class="domain-search-input" placeholder="Search domain extension (e.g. @proton.me, @gmail.com)..." oninput="renderDomains()">
-                </div>
+                <!-- RIGHT BOX: DEMO DOMAINS (EXISTING 15+ EXTENSIONS) -->
+                <div class="card-box domain-mode-box" id="demoDomainBoxCard">
+                    <div class="domain-box-top-header">
+                        <div class="domain-box-title-wrap">
+                            <h2 class="section-title" style="margin: 0; white-space: nowrap;"><i class="fa-solid fa-server"></i> Demo Extensions</h2>
+                            <span class="inbox-count-badge" id="domainCountLabel">15</span>
+                        </div>
+                        <div class="domain-box-actions-wrap">
+                            <button type="button" class="secondary-btn compact-hdr-btn" onclick="resetDomainsToDefaultList()" title="Restore the official 15 domains">
+                                <i class="fa-solid fa-rotate-left"></i> Reset 15 Domains
+                            </button>
+                            <button type="button" class="box-select-toggle" id="selectDemoBoxBtn" onclick="setDomainMode('demo')">
+                                <i class="fa-regular fa-circle"></i> <span id="selectDemoBoxBtnText">Select Demo</span>
+                            </button>
+                        </div>
+                    </div>
 
-                <div class="domain-grid-list" id="domainListContainer"></div>
+                    <div class="domain-box-subbar">
+                        <span id="defaultDomainIndicator" style="font-weight: 600; color: var(--text-main);">Default: @gmail.com</span>
+                        <span style="color: var(--warning); font-weight: 700;"><i class="fa-solid fa-flask"></i> Sandbox Mode</span>
+                    </div>
 
-                <div class="add-domain-box">
-                    <input type="text" id="newDomainInput" placeholder="Add new extension (e.g. @mycompany.com)">
-                    <button class="primary-btn small" onclick="addNewDomain()"><i class="fa-solid fa-plus"></i> Add & Set Default</button>
+                    <div class="domain-toolbar">
+                        <input type="text" id="domainSearchInput" class="domain-search-input" placeholder="Search demo extension (e.g. @proton.me, @gmail.com)..." oninput="renderDomains()">
+                    </div>
+
+                    <div class="domain-grid-list" id="domainListContainer"></div>
+
+                    <div class="add-domain-box">
+                        <input type="text" id="newDomainInput" placeholder="Add custom demo extension (e.g. @mycompany.com)">
+                        <button class="primary-btn small" onclick="addNewDomain()" style="white-space: nowrap;"><i class="fa-solid fa-plus"></i> Add &amp; Set Default</button>
+                    </div>
                 </div>
             </div>
         </main>
@@ -2615,6 +3209,12 @@
          3. PRICING PAGE VIEW
          ========================================== -->
     <div id="page-pricing" class="page-view">
+        <div class="page-top-bar">
+            <button type="button" class="back-home-btn" onclick="switchPage('home')">
+                <i class="fa-solid fa-arrow-left"></i> Back to Home
+            </button>
+            <span style="font-size: 12px; font-weight: 600; color: var(--text-muted);">Pricing & Plans</span>
+        </div>
         <header class="hero">
             <div class="badge"><i class="fa-solid fa-crown"></i> Upgrade Workspace</div>
             <h1>Flexible <span>Premium Plans</span></h1>
@@ -2692,6 +3292,12 @@
          4. CHECKOUT PAGE VIEW
          ========================================== -->
     <div id="page-checkout" class="page-view">
+        <div class="page-top-bar">
+            <button type="button" class="back-home-btn" onclick="switchPage('home')">
+                <i class="fa-solid fa-arrow-left"></i> Back to Home
+            </button>
+            <span style="font-size: 12px; font-weight: 600; color: var(--text-muted);">Secure Checkout</span>
+        </div>
         <header class="hero">
             <div class="badge"><i class="fa-solid fa-lock"></i> 256-Bit Encrypted</div>
             <h1>Complete Your <span>Upgrade</span></h1>
@@ -2743,6 +3349,12 @@
          5. DEVELOPER API PAGE VIEW
          ========================================== -->
     <div id="page-api" class="page-view">
+        <div class="page-top-bar">
+            <button type="button" class="back-home-btn" onclick="switchPage('home')">
+                <i class="fa-solid fa-arrow-left"></i> Back to Home
+            </button>
+            <span style="font-size: 12px; font-weight: 600; color: var(--text-muted);">Developer API</span>
+        </div>
         <header class="hero">
             <div class="badge"><i class="fa-solid fa-terminal"></i> REST & Firebase API</div>
             <h1>Developer <span>API & Webhooks</span></h1>
@@ -2787,6 +3399,12 @@ console.log('Active Messages:', messages);</pre>
          6. CONTACT US PAGE VIEW
          ========================================== -->
     <div id="page-contact" class="page-view">
+        <div class="page-top-bar">
+            <button type="button" class="back-home-btn" onclick="switchPage('home')">
+                <i class="fa-solid fa-arrow-left"></i> Back to Home
+            </button>
+            <span style="font-size: 12px; font-weight: 600; color: var(--text-muted);">Support Desk</span>
+        </div>
         <header class="hero">
             <div class="badge"><i class="fa-solid fa-headset"></i> 24/7 Support Desk</div>
             <h1>Get in <span>Touch</span></h1>
@@ -2836,6 +3454,12 @@ console.log('Active Messages:', messages);</pre>
          7. PRIVACY & POLICY PAGE VIEW
          ========================================== -->
     <div id="page-privacy" class="page-view">
+        <div class="page-top-bar">
+            <button type="button" class="back-home-btn" onclick="switchPage('home')">
+                <i class="fa-solid fa-arrow-left"></i> Back to Home
+            </button>
+            <span style="font-size: 12px; font-weight: 600; color: var(--text-muted);">Privacy & Security Policy</span>
+        </div>
         <header class="hero">
             <div class="badge"><i class="fa-solid fa-shield-halved"></i> Legal &amp; Data Protection</div>
             <h1>Privacy &amp; <span>Security Policy</span></h1>
@@ -3328,7 +3952,7 @@ Security Team</textarea>
         }
 
         // ==========================================
-        // 4. EXACT 15 DOMAINS LIST & DEFAULT SYNC
+        // 4. DUAL-ENGINE DOMAINS (REAL-TIME API + 15 DEMO DOMAINS)
         // ==========================================
         const OFFICIAL_15_DOMAINS = [
             '@gmail.com',
@@ -3348,6 +3972,36 @@ Security Team</textarea>
             '@xeramail.com'
         ];
 
+        // Verified Real-Time Domains: Native CORS APIs (Mail.tm, Mail.gw, Maildrop.cc) + Multi-Relay Tempmail.plus
+        const INITIAL_REALTIME_DOMAINS = [
+            '@maildrop.cc',
+            '@mailto.plus',
+            '@fexpost.com',
+            '@fexbox.org',
+            '@mailbox.in.ua',
+            '@rover.info',
+            '@chitthi.in',
+            '@fextemp.com',
+            '@any.pink',
+            '@merepost.com'
+        ];
+
+        const DEFAULT_PROVIDER_MAP = {
+            '@maildrop.cc': 'api.maildrop.cc',
+            '@mailto.plus': 'tempmail.plus',
+            '@fexpost.com': 'tempmail.plus',
+            '@fexbox.org': 'tempmail.plus',
+            '@mailbox.in.ua': 'tempmail.plus',
+            '@rover.info': 'tempmail.plus',
+            '@chitthi.in': 'tempmail.plus',
+            '@fextemp.com': 'tempmail.plus',
+            '@any.pink': 'tempmail.plus',
+            '@merepost.com': 'tempmail.plus'
+        };
+
+        let domainMode = safeGetStorage('multimail_domain_mode_v5', 'real'); // 'real' or 'demo'
+        if (domainMode !== 'real' && domainMode !== 'demo') domainMode = 'real';
+
         let domains = safeGetStorage('multimail_domains_v2', null);
         if (!Array.isArray(domains) || domains.length === 0) {
             domains = [...OFFICIAL_15_DOMAINS];
@@ -3357,9 +4011,245 @@ Security Team</textarea>
             defaultDomain = domains[0];
         }
 
+        let realDomains = safeGetStorage('multimail_real_domains_v5', null);
+        if (!Array.isArray(realDomains) || realDomains.length < 5) {
+            realDomains = [...INITIAL_REALTIME_DOMAINS];
+        }
+        let defaultRealDomain = safeGetStorage('multimail_default_real_domain_v5', realDomains[0]);
+        if (!realDomains.includes(defaultRealDomain)) {
+            defaultRealDomain = realDomains[0];
+        }
+
+        let realDomainProviderMap = safeGetStorage('multimail_real_provider_map_v5', { ...DEFAULT_PROVIDER_MAP });
+        Object.assign(realDomainProviderMap, DEFAULT_PROVIDER_MAP);
+
         function saveDomainsState() {
+            safeSetStorage('multimail_domain_mode_v5', domainMode);
             safeSetStorage('multimail_domains_v2', domains);
             safeSetStorage('multimail_default_domain_v2', defaultDomain);
+            safeSetStorage('multimail_real_domains_v5', realDomains);
+            safeSetStorage('multimail_default_real_domain_v5', defaultRealDomain);
+            safeSetStorage('multimail_real_provider_map_v5', realDomainProviderMap);
+        }
+
+        function getActiveDomainsList() {
+            return domainMode === 'real' ? realDomains : domains;
+        }
+
+        function getActiveDefaultDomain() {
+            return domainMode === 'real' ? defaultRealDomain : defaultDomain;
+        }
+
+        function isRealDomainExtension(dom) {
+            return realDomains.includes(dom) || Boolean(realDomainProviderMap[dom]);
+        }
+
+        function getProviderBadgeLabel(provHost) {
+            const p = String(provHost || '').toLowerCase();
+            if (p.includes('tempmail.plus')) return 'TEMPMAIL+';
+            if (p.includes('1secmail')) return '1SECMAIL';
+            if (p.includes('maildrop')) return 'MAILDROP';
+            if (p.includes('guerrilla')) return 'GUERRILLA';
+            if (p.includes('xeramail')) return 'XERAMAIL';
+            if (p.includes('mail.gw')) return 'MAIL.GW';
+            if (p.includes('mail.tm')) return 'MAIL.TM';
+            return 'LIVE API';
+        }
+
+        function extractApiItemsList(data) {
+            if (!data) return [];
+            if (Array.isArray(data)) return data;
+            if (Array.isArray(data['hydra:member'])) return data['hydra:member'];
+            if (Array.isArray(data.member)) return data.member;
+            return [];
+        }
+
+        async function fetchWithTimeout(url, options = {}, timeoutMs = 4500) {
+            const controller = new AbortController();
+            const timer = setTimeout(() => controller.abort(), timeoutMs);
+            try {
+                const res = await fetch(url, {
+                    ...options,
+                    cache: 'no-store',
+                    signal: controller.signal
+                });
+                clearTimeout(timer);
+                return res;
+            } catch (e) {
+                clearTimeout(timer);
+                throw e;
+            }
+        }
+
+        // 4-Layer Cache-Busted Smart Fetch (Direct -> AllOrigins JSON Wrapper -> CodeTabs -> CorsProxy)
+        async function smartGetJson(url, customHeaders = {}) {
+            try {
+                const res = await fetchWithTimeout(url, {
+                    method: 'GET',
+                    headers: { 'Accept': 'application/json', ...customHeaders }
+                }, 4000);
+                if (res.ok) return await res.json();
+            } catch (e) {}
+
+            if (!customHeaders['Authorization']) {
+                const bustUrl = url + (url.includes('?') ? '&' : '?') + '_t=' + Date.now();
+                // 1. AllOrigins JSON wrapper (works from file:// and https:// with Access-Control-Allow-Origin: *)
+                try {
+                    const aoRes = await fetchWithTimeout('https://api.allorigins.win/get?url=' + encodeURIComponent(bustUrl), {}, 4500);
+                    if (aoRes.ok) {
+                        const aoData = await aoRes.json();
+                        if (aoData && aoData.contents) {
+                            return JSON.parse(aoData.contents);
+                        }
+                    }
+                } catch (e) {}
+
+                // 2. CodeTabs & AllOrigins Raw & CorsProxy fallbacks
+                const proxyUrls = [
+                    'https://api.codetabs.com/v1/proxy?quest=' + encodeURIComponent(bustUrl),
+                    'https://api.allorigins.win/raw?url=' + encodeURIComponent(bustUrl),
+                    'https://corsproxy.io/?' + encodeURIComponent(bustUrl)
+                ];
+                for (const pUrl of proxyUrls) {
+                    try {
+                        const resP = await fetchWithTimeout(pUrl, {}, 4000);
+                        if (resP.ok) return await resP.json();
+                    } catch (e2) {}
+                }
+            }
+            return null;
+        }
+
+        async function fetchRealtimeDomainsFromApi(showFeedback = false) {
+            const syncIcon = document.getElementById('realDomainsSyncIcon');
+            const healthLabel = document.getElementById('realApiHealthLabel');
+            if (syncIcon) syncIcon.classList.add('fa-spin');
+
+            const providers = [
+                { name: 'Mail.tm', host: 'api.mail.tm' },
+                { name: 'Mail.gw', host: 'api.mail.gw' }
+            ];
+
+            const discovered = [];
+            await Promise.all(providers.map(async (prov) => {
+                try {
+                    const res = await fetchWithTimeout(`https://${prov.host}/domains?page=1`, {
+                        headers: { 'Accept': 'application/json' }
+                    }, 4500);
+                    if (res.ok) {
+                        const data = await res.json();
+                        const list = extractApiItemsList(data);
+                        list.forEach(item => {
+                            if (item && item.domain && item.isActive !== false) {
+                                const ext = '@' + String(item.domain).trim().toLowerCase();
+                                if (!discovered.includes(ext)) {
+                                    discovered.push(ext);
+                                }
+                                realDomainProviderMap[ext] = prov.host;
+                            }
+                        });
+                    }
+                } catch (e) {}
+            }));
+
+            // Put direct-CORS verified live domains (Mail.tm, Mail.gw, @maildrop.cc) first!
+            const merged = [...discovered];
+            if (!merged.includes('@maildrop.cc')) merged.push('@maildrop.cc');
+            INITIAL_REALTIME_DOMAINS.forEach(d => {
+                if (!merged.includes(d)) merged.push(d);
+            });
+            const removedBroken = new Set(['@1secmail.com', '@1secmail.org', '@1secmail.net', '@wwjmp.com', '@esiix.com', '@sharklasers.com', '@grr.la', '@guerrillamail.com', '@xeramail.com', '@phuturemail.com']);
+            realDomains.forEach(d => {
+                if (!merged.includes(d) && !removedBroken.has(d)) merged.push(d);
+            });
+
+            realDomains = merged;
+
+            // Always promote a native CORS live domain (Mail.tm / Mail.gw / Maildrop) as default if current default is on tempmail.plus or missing
+            const currentProv = realDomainProviderMap[defaultRealDomain] || '';
+            const isNativeCorsDefault = (currentProv === 'api.mail.tm' || currentProv === 'api.mail.gw' || currentProv === 'api.maildrop.cc');
+            if (!realDomains.includes(defaultRealDomain) || (!isNativeCorsDefault && discovered.length > 0)) {
+                defaultRealDomain = discovered[0] || '@maildrop.cc';
+            }
+
+            if (healthLabel) {
+                healthLabel.innerHTML = `<i class="fa-solid fa-circle-check"></i> Live APIs Connected (${realDomains.length} Domains)`;
+                healthLabel.style.color = 'var(--success)';
+            }
+            if (showFeedback) {
+                showToast(`Synced ${realDomains.length} live domains! Default set to ${defaultRealDomain}`, 'success');
+            }
+
+            if (syncIcon) syncIcon.classList.remove('fa-spin');
+            renderDomains(true);
+        }
+
+        function setDomainMode(mode, silent = false) {
+            if (mode !== 'real' && mode !== 'demo') mode = 'real';
+            domainMode = mode;
+
+            const hiddenSelect = document.getElementById('domainSelect');
+            const selectedDomainText = document.getElementById('selectedDomainText');
+            const nextDefault = getActiveDefaultDomain();
+            if (hiddenSelect && selectedDomainText) {
+                hiddenSelect.value = nextDefault;
+                selectedDomainText.innerText = nextDefault;
+            }
+
+            saveDomainsState();
+            renderDomains(true);
+            if (!silent) {
+                showToast(
+                    mode === 'real'
+                        ? `Real-Time Mode active! Home dropdown set to ${defaultRealDomain}`
+                        : `Demo Mode active! Home dropdown set to ${defaultDomain}`,
+                    'success'
+                );
+            }
+        }
+
+        function syncModeSelectorUI() {
+            const isReal = (domainMode === 'real');
+            const modeCardReal = document.getElementById('modeCardReal');
+            const modeCardDemo = document.getElementById('modeCardDemo');
+            const realBox = document.getElementById('realDomainBoxCard');
+            const demoBox = document.getElementById('demoDomainBoxCard');
+            const selectRealBtn = document.getElementById('selectRealBoxBtn');
+            const selectDemoBtn = document.getElementById('selectDemoBoxBtn');
+            const homeModeBadge = document.getElementById('homeActiveModeBadge');
+            const domainsPageBadge = document.getElementById('domainsPageActiveBadge');
+
+            if (modeCardReal) modeCardReal.classList.toggle('selected-mode', isReal);
+            if (modeCardDemo) modeCardDemo.classList.toggle('selected-mode', !isReal);
+            if (realBox) realBox.classList.toggle('active-domain-box', isReal);
+            if (demoBox) demoBox.classList.toggle('active-domain-box', !isReal);
+
+            if (selectRealBtn) {
+                selectRealBtn.classList.toggle('selected', isReal);
+                selectRealBtn.innerHTML = isReal
+                    ? '<i class="fa-solid fa-circle-check"></i> <span id="selectRealBoxBtnText">Selected</span>'
+                    : '<i class="fa-regular fa-circle"></i> <span id="selectRealBoxBtnText">Select Real</span>';
+            }
+            if (selectDemoBtn) {
+                selectDemoBtn.classList.toggle('selected', !isReal);
+                selectDemoBtn.innerHTML = !isReal
+                    ? '<i class="fa-solid fa-circle-check"></i> <span id="selectDemoBoxBtnText">Selected</span>'
+                    : '<i class="fa-regular fa-circle"></i> <span id="selectDemoBoxBtnText">Select Demo</span>';
+            }
+
+            if (homeModeBadge) {
+                homeModeBadge.className = `mode-pill-tag ${isReal ? 'real' : 'demo'}`;
+                homeModeBadge.innerHTML = isReal
+                    ? '<i class="fa-solid fa-satellite-dish"></i> Real-Time'
+                    : '<i class="fa-solid fa-flask"></i> Demo Mode';
+            }
+
+            if (domainsPageBadge) {
+                domainsPageBadge.className = `mode-pill-tag ${isReal ? 'real' : 'demo'}`;
+                domainsPageBadge.innerHTML = isReal
+                    ? '<i class="fa-solid fa-satellite-dish"></i> Active Mode: Real-Time API'
+                    : '<i class="fa-solid fa-flask"></i> Active Mode: Demo Extensions';
+            }
         }
 
         function toggleDropdown(event) {
@@ -3389,76 +4279,123 @@ Security Team</textarea>
         });
 
         function renderDomains(forceSyncHomeToDefault = false) {
+            syncModeSelectorUI();
+
             const listContainer = document.getElementById('domainListContainer');
+            const realListContainer = document.getElementById('realDomainListContainer');
             const customDropdownList = document.getElementById('domainList');
             const hiddenSelect = document.getElementById('domainSelect');
             const selectedDomainText = document.getElementById('selectedDomainText');
             const defaultIndicator = document.getElementById('defaultDomainIndicator');
+            const realDefaultIndicator = document.getElementById('realDefaultDomainIndicator');
             const domainCountLabel = document.getElementById('domainCountLabel');
+            const realDomainCountLabel = document.getElementById('realDomainCountLabel');
             const activeDomainsBadge = document.getElementById('activeDomainsBadge');
-            const searchQuery = (document.getElementById('domainSearchInput')?.value || '').trim().toLowerCase();
+            const navDomainsLink = document.getElementById('nav-domains');
 
-            // If default domain changed or no valid domain selected, sync Home page automatically
-            if (forceSyncHomeToDefault || !hiddenSelect.value || !domains.includes(hiddenSelect.value)) {
-                hiddenSelect.value = defaultDomain;
-                selectedDomainText.innerText = defaultDomain;
+            const demoSearchQuery = (document.getElementById('domainSearchInput')?.value || '').trim().toLowerCase();
+            const realSearchQuery = (document.getElementById('realDomainSearchInput')?.value || '').trim().toLowerCase();
+
+            const activePool = getActiveDomainsList();
+            const activeDef = getActiveDefaultDomain();
+
+            if (forceSyncHomeToDefault || !hiddenSelect.value || !activePool.includes(hiddenSelect.value)) {
+                hiddenSelect.value = activeDef;
+                selectedDomainText.innerText = activeDef;
             }
 
             if (defaultIndicator) defaultIndicator.innerText = `Default: ${defaultDomain}`;
+            if (realDefaultIndicator) realDefaultIndicator.innerText = `Default: ${defaultRealDomain}`;
             if (domainCountLabel) domainCountLabel.innerText = domains.length;
-            if (activeDomainsBadge) activeDomainsBadge.innerText = `${domains.length} Domains Ready`;
+            if (realDomainCountLabel) realDomainCountLabel.innerText = realDomains.length;
+            if (activeDomainsBadge) {
+                activeDomainsBadge.innerText = domainMode === 'real'
+                    ? `${realDomains.length} Live Domains`
+                    : `${domains.length} Demo Domains`;
+            }
+            if (navDomainsLink) {
+                navDomainsLink.innerHTML = `<i class="fa-solid fa-globe"></i> Domains (${domainMode === 'real' ? realDomains.length + ' Live' : domains.length + ' Demo'})`;
+            }
 
-            // Populate Home Page Scrollable Dropdown (Top 5 visible, rest scrollable)
-            customDropdownList.innerHTML = '';
-            domains.forEach(domain => {
-                const li = document.createElement('li');
-                const isSelected = (domain === hiddenSelect.value);
-                const isDef = (domain === defaultDomain);
+            // Populate Home Page Scrollable Dropdown from Active Mode Pool
+            if (customDropdownList) {
+                customDropdownList.innerHTML = '';
+                activePool.forEach(domain => {
+                    const li = document.createElement('li');
+                    const isSelected = (domain === hiddenSelect.value);
+                    const isDef = (domain === activeDef);
 
-                li.innerHTML = `
-                    <span>${domain}</span>
-                    ${isDef ? '<span class="dropdown-default-tag">Default</span>' : (isSelected ? '<i class="fa-solid fa-check"></i>' : '')}
-                `;
-                if (isSelected) li.classList.add('selected');
-
-                li.onclick = (e) => {
-                    e.stopPropagation();
-                    hiddenSelect.value = domain;
-                    selectedDomainText.innerText = domain;
-                    renderDomains(false);
-                    document.getElementById('customDomainDropdown').classList.remove('active');
-                    checkAvailability();
-                };
-                customDropdownList.appendChild(li);
-            });
-
-            // Populate Domains Management Page
-            listContainer.innerHTML = '';
-            const filteredDomains = domains.filter(d => d.toLowerCase().includes(searchQuery));
-
-            filteredDomains.forEach(domain => {
-                const isDefault = (domain === defaultDomain);
-                const item = document.createElement('div');
-                item.className = `domain-list-item ${isDefault ? 'is-default-item' : ''}`;
-                item.innerHTML = `
-                    <div class="domain-name mono">
+                    li.innerHTML = `
                         <span>${domain}</span>
-                        ${isDefault ? '<span class="default-badge">Default</span>' : ''}
-                    </div>
-                    <div class="action-btns">
-                        ${!isDefault ? `<button class="set-default-btn" onclick="setDefaultDomain('${domain}')">Set Default</button>` : ''}
-                        <button class="remove-btn" onclick="removeDomain('${domain}')" title="Remove domain"><i class="fa-regular fa-trash-can"></i></button>
-                    </div>
-                `;
-                listContainer.appendChild(item);
-            });
+                        ${isDef ? '<span class="dropdown-default-tag">Default</span>' : (isSelected ? '<i class="fa-solid fa-check"></i>' : '')}
+                    `;
+                    if (isSelected) li.classList.add('selected');
+
+                    li.onclick = (e) => {
+                        e.stopPropagation();
+                        hiddenSelect.value = domain;
+                        selectedDomainText.innerText = domain;
+                        renderDomains(false);
+                        document.getElementById('customDomainDropdown').classList.remove('active');
+                        checkAvailability();
+                    };
+                    customDropdownList.appendChild(li);
+                });
+            }
+
+            // Populate Left Box: Real-Time Domains
+            if (realListContainer) {
+                realListContainer.innerHTML = '';
+                const filteredReal = realDomains.filter(d => d.toLowerCase().includes(realSearchQuery));
+                filteredReal.forEach(domain => {
+                    const isDefault = (domain === defaultRealDomain);
+                    const provHost = realDomainProviderMap[domain] || 'tempmail.plus';
+                    const provTag = getProviderBadgeLabel(provHost);
+                    const item = document.createElement('div');
+                    item.className = `domain-list-item ${isDefault ? 'is-default-item' : ''}`;
+                    item.innerHTML = `
+                        <div class="domain-name mono" title="${domain} (${provTag})">
+                            <span>${domain}</span>
+                            ${isDefault ? '<span class="default-badge">Default</span>' : ''}
+                        </div>
+                        <div class="action-btns">
+                            ${!isDefault ? `<button class="set-default-btn" onclick="setDefaultRealDomain('${domain}')">Set Default</button>` : ''}
+                            <button class="remove-btn" onclick="removeRealDomain('${domain}')" title="Remove live domain"><i class="fa-regular fa-trash-can"></i></button>
+                        </div>
+                    `;
+                    realListContainer.appendChild(item);
+                });
+            }
+
+            // Populate Right Box: Demo Domains
+            if (listContainer) {
+                listContainer.innerHTML = '';
+                const filteredDemo = domains.filter(d => d.toLowerCase().includes(demoSearchQuery));
+                filteredDemo.forEach(domain => {
+                    const isDefault = (domain === defaultDomain);
+                    const item = document.createElement('div');
+                    item.className = `domain-list-item ${isDefault ? 'is-default-item' : ''}`;
+                    item.innerHTML = `
+                        <div class="domain-name mono">
+                            <span title="${domain}">${domain}</span>
+                            ${isDefault ? '<span class="default-badge">Default</span>' : ''}
+                        </div>
+                        <div class="action-btns">
+                            ${!isDefault ? `<button class="set-default-btn" onclick="setDefaultDomain('${domain}')">Set Default</button>` : ''}
+                            <button class="remove-btn" onclick="removeDomain('${domain}')" title="Remove domain"><i class="fa-regular fa-trash-can"></i></button>
+                        </div>
+                    `;
+                    listContainer.appendChild(item);
+                });
+            }
 
             saveDomainsState();
             checkAvailability();
         }
 
-        function setDefaultDomain(domain) {
-            defaultDomain = domain;
+        function setDefaultRealDomain(domain) {
+            defaultRealDomain = domain;
+            domainMode = 'real';
             const hiddenSelect = document.getElementById('domainSelect');
             const selectedDomainText = document.getElementById('selectedDomainText');
             if (hiddenSelect && selectedDomainText) {
@@ -3466,7 +4403,60 @@ Security Team</textarea>
                 selectedDomainText.innerText = domain;
             }
             renderDomains(true);
-            showToast(`Default domain set to ${domain}`, 'success');
+            showToast(`Real-Time mode active with default ${domain}`, 'success');
+        }
+
+        function addNewRealDomain() {
+            const input = document.getElementById('newRealDomainInput');
+            let newDom = (input?.value || '').trim().toLowerCase();
+            if (!newDom) {
+                showToast('Please enter a live domain extension!', 'warning');
+                return;
+            }
+            if (!newDom.startsWith('@')) newDom = '@' + newDom;
+            if (!newDom.includes('.') || newDom.length < 4) {
+                showToast('Please enter a valid domain extension (e.g. @any.pink)!', 'warning');
+                return;
+            }
+            if (realDomains.includes(newDom)) {
+                showToast(`${newDom} is already in your Real-Time list!`, 'error');
+                return;
+            }
+            realDomains.unshift(newDom);
+            if (!realDomainProviderMap[newDom]) {
+                realDomainProviderMap[newDom] = DEFAULT_PROVIDER_MAP[newDom] || 'tempmail.plus';
+            }
+            defaultRealDomain = newDom;
+            domainMode = 'real';
+            if (input) input.value = '';
+            renderDomains(true);
+            showToast(`Added ${newDom} to Real-Time Domains & set as Default!`, 'success');
+        }
+
+        function removeRealDomain(domain) {
+            if (realDomains.length <= 1) {
+                showToast('At least one real-time domain is required!', 'error');
+                return;
+            }
+            realDomains = realDomains.filter(d => d !== domain);
+            if (defaultRealDomain === domain) {
+                defaultRealDomain = realDomains[0];
+            }
+            renderDomains(true);
+            showToast(`Removed ${domain} from Real-Time list`, 'info');
+        }
+
+        function setDefaultDomain(domain) {
+            defaultDomain = domain;
+            domainMode = 'demo';
+            const hiddenSelect = document.getElementById('domainSelect');
+            const selectedDomainText = document.getElementById('selectedDomainText');
+            if (hiddenSelect && selectedDomainText) {
+                hiddenSelect.value = domain;
+                selectedDomainText.innerText = domain;
+            }
+            renderDomains(true);
+            showToast(`Demo mode active with default ${domain}`, 'success');
         }
 
         function addNewDomain() {
@@ -3485,20 +4475,21 @@ Security Team</textarea>
                 return;
             }
             if (domains.includes(newDomain)) {
-                showToast(`${newDomain} is already in your domain list!`, 'error');
+                showToast(`${newDomain} is already in your demo domain list!`, 'error');
                 return;
             }
 
             domains.unshift(newDomain);
             defaultDomain = newDomain;
+            domainMode = 'demo';
             input.value = '';
             renderDomains(true);
-            showToast(`Added ${newDomain} and set as Default!`, 'success');
+            showToast(`Added ${newDomain} to Demo Domains & set as Default!`, 'success');
         }
 
         function removeDomain(domain) {
             if (domains.length <= 1) {
-                showToast('At least one domain extension is required!', 'error');
+                showToast('At least one demo domain extension is required!', 'error');
                 return;
             }
             domains = domains.filter(d => d !== domain);
@@ -3513,12 +4504,15 @@ Security Team</textarea>
             domains = [...OFFICIAL_15_DOMAINS];
             defaultDomain = '@gmail.com';
             renderDomains(true);
-            showToast('Restored all 15 official domains!', 'success');
+            showToast('Restored all 15 official demo domains!', 'success');
         }
 
         // ==========================================
-        // 5. NAVIGATION & MODALS
+        // 5. NAVIGATION, URL ROUTING & BROWSER BACK BUTTON SUPPORT
         // ==========================================
+        const VALID_PAGES = ['home', 'domains', 'pricing', 'checkout', 'api', 'privacy', 'contact'];
+        let currentPage = 'home';
+
         function closeMobileMenu() {
             const menu = document.getElementById('navLinksMenu');
             const icon = document.getElementById('mobileMenuIcon');
@@ -3526,7 +4520,10 @@ Security Team</textarea>
             if (icon) icon.className = 'fa-solid fa-bars';
         }
 
-        function switchPage(page) {
+        function switchPage(page, pushHistory = true) {
+            if (!VALID_PAGES.includes(page)) page = 'home';
+            currentPage = page;
+
             document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.nav-links-pill .nav-item').forEach(el => el.classList.remove('active'));
 
@@ -3536,9 +4533,37 @@ Security Team</textarea>
             const navItem = document.getElementById('nav-' + page);
             if (navItem) navItem.classList.add('active');
 
+            if (pushHistory) {
+                const targetHash = `#/${page}`;
+                if (window.location.hash !== targetHash) {
+                    try {
+                        history.pushState({ page }, '', targetHash);
+                    } catch (e) {}
+                }
+            }
+
             closeMobileMenu();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        function syncPageFromUrl() {
+            const rawHash = (window.location.hash || '').replace(/^#\/?/, '').trim().toLowerCase();
+            if (rawHash === 'recover') {
+                switchPage('home', false);
+                toggleRecoverEmailView(true);
+                return;
+            }
+            const targetPage = VALID_PAGES.includes(rawHash) ? rawHash : 'home';
+            switchPage(targetPage, false);
+        }
+
+        window.addEventListener('popstate', () => {
+            syncPageFromUrl();
+        });
+
+        window.addEventListener('hashchange', () => {
+            syncPageFromUrl();
+        });
 
         function toggleMobileMenu(e) {
             if (e) e.stopPropagation();
@@ -3555,16 +4580,20 @@ Security Team</textarea>
             try {
                 localStorage.removeItem('multimail_saved_accounts_v2');
                 localStorage.removeItem('multimail_saved_names_v2');
+                localStorage.removeItem('multimail_recovery_kits_v2');
+                localStorage.removeItem('multimail_live_tokens_v2');
                 localStorage.removeItem('multimail_active_email_v2');
                 localStorage.removeItem('multimail_inboxes_v2');
                 localStorage.removeItem('multimail_custom_pwd_v2');
             } catch (e) {}
             savedMails = [];
             savedMailNames = {};
+            savedRecoveryKits = {};
+            liveMailTokens = {};
             inboxStore = {};
             resetMail();
             generateStrongPassword(true);
-            showToast('Cleared all saved browser mail & inbox data!', 'success');
+            showToast('Cleared all saved browser mail, recovery kits & inbox data!', 'success');
         }
 
         function openCheckout(planName, planPrice) {
@@ -3608,20 +4637,272 @@ Security Team</textarea>
         }
 
         // ==========================================
-        // 6. MULTI-MAIL GENERATOR, EXACT NAME DISPLAY & SAVED ACCOUNTS
+        // 6. MULTI-MAIL GENERATOR, RECOVERY KIT & RECOVER EMAIL VIEW
         // ==========================================
         const nameInput = document.getElementById('nameInput');
         const enteredNameDisplay = document.getElementById('enteredNameDisplay');
         const generatedMail = document.getElementById('generatedMail');
         const workspace = document.getElementById('workspace');
         const inputSection = document.getElementById('inputSection');
+        const recoverEmailSection = document.getElementById('recoverEmailSection');
         const availabilityStatus = document.getElementById('availabilityStatus');
         const createMailBtn = document.getElementById('createMailBtn');
 
         let savedMails = safeGetStorage('multimail_saved_accounts_v2', []);
         let savedMailNames = safeGetStorage('multimail_saved_names_v2', {});
+        let savedRecoveryKits = safeGetStorage('multimail_recovery_kits_v2', {});
+        let liveMailTokens = safeGetStorage('multimail_live_tokens_v2', {});
         let activeEmail = safeGetStorage('multimail_active_email_v2', '');
+        let isRecoverViewOpen = false;
         let checkTimeout = null;
+
+        function generateRecoveryKitCode() {
+            const chars = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
+            const seg = (len) => Array.from({ length: len }, () => chars.charAt(Math.floor(Math.random() * chars.length))).join('');
+            return `MMK-${seg(4)}-${seg(4)}`;
+        }
+
+        function ensureRecoveryKitForEmail(email) {
+            if (!email) return '';
+            if (!savedRecoveryKits[email]) {
+                savedRecoveryKits[email] = generateRecoveryKitCode();
+                safeSetStorage('multimail_recovery_kits_v2', savedRecoveryKits);
+            }
+            return savedRecoveryKits[email];
+        }
+
+        function toggleRecoverEmailView(forceState) {
+            isRecoverViewOpen = typeof forceState === 'boolean' ? forceState : !isRecoverViewOpen;
+
+            const recoverBtn = document.getElementById('recoverToggleBtn');
+            const recoverBtnText = document.getElementById('recoverToggleBtnText');
+            const cardTitle = document.getElementById('generatorCardTitle');
+            const helperNameBox = document.getElementById('helperNameBox');
+            const helperPwdBox = document.getElementById('helperPwdBox');
+            const recoverStatus = document.getElementById('recoverStatusMsg');
+
+            if (isRecoverViewOpen) {
+                inputSection.style.display = 'none';
+                workspace.style.display = 'none';
+                if (helperNameBox) helperNameBox.style.display = 'none';
+                if (helperPwdBox) helperPwdBox.style.display = 'none';
+                recoverEmailSection.style.display = 'flex';
+
+                if (recoverBtn) recoverBtn.classList.add('active-mode');
+                if (recoverBtnText) recoverBtnText.innerText = 'Back to Generator';
+                if (cardTitle) cardTitle.innerHTML = '<i class="fa-solid fa-unlock-keyhole"></i> Recover Email';
+                if (recoverStatus) recoverStatus.innerHTML = '';
+
+                setTimeout(() => {
+                    document.getElementById('recoverEmailInput')?.focus();
+                }, 60);
+            } else {
+                recoverEmailSection.style.display = 'none';
+                if (helperNameBox) helperNameBox.style.display = 'block';
+                if (helperPwdBox) helperPwdBox.style.display = 'block';
+
+                if (activeEmail) {
+                    workspace.style.display = 'block';
+                    inputSection.style.display = 'none';
+                } else {
+                    workspace.style.display = 'none';
+                    inputSection.style.display = 'block';
+                }
+
+                if (recoverBtn) recoverBtn.classList.remove('active-mode');
+                if (recoverBtnText) recoverBtnText.innerText = 'Recover Email';
+                if (cardTitle) cardTitle.innerHTML = '<i class="fa-solid fa-at"></i> Mail Generator';
+            }
+        }
+
+        async function pasteRecoveryKitFromClipboard() {
+            const kitInput = document.getElementById('recoverKitInput');
+            if (!kitInput) return;
+            if (navigator.clipboard && navigator.clipboard.readText) {
+                try {
+                    const text = await navigator.clipboard.readText();
+                    if (text) {
+                        kitInput.value = text.trim();
+                        showToast('Pasted Recovery Kit from clipboard!', 'info');
+                    }
+                } catch (e) {
+                    kitInput.focus();
+                    showToast('Press Ctrl+V to paste your Recovery Kit', 'info');
+                }
+            } else {
+                kitInput.focus();
+            }
+        }
+
+        function copyActiveRecoveryKit() {
+            const kit = document.getElementById('activeRecoveryKitInput')?.value || savedRecoveryKits[activeEmail];
+            if (!kit) {
+                showToast('No Recovery Kit found for active email!', 'warning');
+                return;
+            }
+            copyTextValue(kit, `Copied Recovery Kit: ${kit}`);
+        }
+
+        function downloadRecoveryKitTxt() {
+            if (!activeEmail) return;
+            const kit = ensureRecoveryKitForEmail(activeEmail);
+            const rawName = savedMailNames[activeEmail] || activeEmail.split('@')[0];
+            const modeLabel = isRealDomainExtension('@' + activeEmail.split('@')[1]) ? 'Real-Time Live API Mail' : 'Demo Mail';
+            const content = [
+                '==========================================',
+                '   MULTIMAIL STUDIO — EMAIL RECOVERY KIT  ',
+                '==========================================',
+                `Email Address : ${activeEmail}`,
+                `Recovery Kit  : ${kit}`,
+                `Account Name  : ${rawName}`,
+                `Mailbox Mode  : ${modeLabel}`,
+                `Generated On  : ${new Date().toLocaleString()}`,
+                '------------------------------------------',
+                'How to Re-Access Your Inbox Later:',
+                '1. Open MultiMail Studio and click "Recover Email".',
+                '2. Enter your Email Address and Recovery Kit above.',
+                '3. Click "Access Inbox Now" to restore live messages.',
+                '=========================================='
+            ].join('\n');
+
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `recovery_kit_${activeEmail.replace(/[^a-z0-9]/gi, '_')}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast('Recovery Kit downloaded as .TXT!', 'success');
+        }
+
+        async function recoverEmailWithKit() {
+            const emailInput = document.getElementById('recoverEmailInput');
+            const kitInput = document.getElementById('recoverKitInput');
+            const statusMsg = document.getElementById('recoverStatusMsg');
+            const submitBtn = document.getElementById('recoverSubmitBtn');
+
+            const targetEmail = (emailInput?.value || '').trim().toLowerCase();
+            const targetKit = (kitInput?.value || '').trim();
+
+            if (!targetEmail || !targetEmail.includes('@')) {
+                showToast('Please enter a valid email address!', 'warning');
+                emailInput?.focus();
+                return;
+            }
+            if (!targetKit || targetKit.length < 4) {
+                showToast('Please enter your Recovery Kit key!', 'warning');
+                kitInput?.focus();
+                return;
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Verifying Recovery Kit...';
+            statusMsg.className = 'status-msg status-checking';
+            statusMsg.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Authenticating mailbox & Recovery Kit...';
+
+            const domainPart = '@' + targetEmail.split('@')[1];
+            let recoveredSuccess = false;
+            let recoveredRawName = savedMailNames[targetEmail] || targetEmail.split('@')[0];
+
+            // 1. Try authenticating directly against Live Real-Time API (Mail.tm / Mail.gw)
+            const candidateProviders = [];
+            if (realDomainProviderMap[domainPart]) {
+                candidateProviders.push(realDomainProviderMap[domainPart]);
+            }
+            ['api.mail.tm', 'api.mail.gw'].forEach(p => {
+                if (!candidateProviders.includes(p)) candidateProviders.push(p);
+            });
+
+            for (const apiBase of candidateProviders) {
+                try {
+                    const tokenRes = await fetch(`https://${apiBase.replace(/^https?:\/\//, '')}/token`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ address: targetEmail, password: targetKit })
+                    });
+                    if (tokenRes.ok) {
+                        const tokenData = await tokenRes.json();
+                        if (tokenData && tokenData.token) {
+                            liveMailTokens[targetEmail] = {
+                                token: tokenData.token,
+                                apiBase: apiBase,
+                                password: targetKit
+                            };
+                            safeSetStorage('multimail_live_tokens_v2', liveMailTokens);
+                            realDomainProviderMap[domainPart] = apiBase;
+                            if (!realDomains.includes(domainPart)) {
+                                realDomains.unshift(domainPart);
+                            }
+                            recoveredSuccess = true;
+                            break;
+                        }
+                    }
+                } catch (e) {
+                    // Continue to Firebase / LocalStorage verification
+                }
+            }
+
+            // 2. Check LocalStorage & Firebase registered_emails backup
+            if (!recoveredSuccess) {
+                if (savedRecoveryKits[targetEmail] && savedRecoveryKits[targetEmail].toUpperCase() === targetKit.toUpperCase()) {
+                    recoveredSuccess = true;
+                } else if (database) {
+                    try {
+                        const encoded = encodeEmailForFirebase(targetEmail);
+                        const snap = await database.ref('registered_emails/' + encoded).once('value');
+                        if (snap.exists()) {
+                            const val = snap.val() || {};
+                            if (val.recoveryKit && String(val.recoveryKit).toUpperCase() === targetKit.toUpperCase()) {
+                                recoveredSuccess = true;
+                                if (val.rawName) recoveredRawName = val.rawName;
+                                if (val.token && val.apiBase) {
+                                    liveMailTokens[targetEmail] = {
+                                        token: val.token,
+                                        apiBase: val.apiBase,
+                                        password: targetKit
+                                    };
+                                    safeSetStorage('multimail_live_tokens_v2', liveMailTokens);
+                                }
+                            }
+                        }
+                    } catch (e) {}
+                }
+            }
+
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fa-solid fa-bolt"></i> Access Inbox Now';
+
+            if (!recoveredSuccess) {
+                statusMsg.className = 'status-msg status-taken';
+                statusMsg.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Invalid Email or Recovery Kit! Please check and try again.';
+                showToast('Recovery failed: Invalid Email or Recovery Kit!', 'error');
+                return;
+            }
+
+            // Save restored state and switch back to Active Workspace view
+            savedRecoveryKits[targetEmail] = targetKit;
+            safeSetStorage('multimail_recovery_kits_v2', savedRecoveryKits);
+            savedMailNames[targetEmail] = recoveredRawName;
+            safeSetStorage('multimail_saved_names_v2', savedMailNames);
+
+            if (!savedMails.includes(targetEmail)) {
+                savedMails.unshift(targetEmail);
+                safeSetStorage('multimail_saved_accounts_v2', savedMails);
+            }
+
+            statusMsg.className = 'status-msg status-available';
+            statusMsg.innerHTML = '<i class="fa-solid fa-circle-check"></i> Mailbox recovered! Loading inbox...';
+
+            if (emailInput) emailInput.value = '';
+            if (kitInput) kitInput.value = '';
+
+            toggleRecoverEmailView(false);
+            setActiveEmail(targetEmail);
+            await pollLiveApiMessages(targetEmail, true);
+            showToast(`Successfully recovered ${targetEmail}!`, 'success');
+        }
 
         // Pure Name & Username Modifier State
         let currentRawName = '';
@@ -3635,14 +4916,20 @@ Security Team</textarea>
         let trailingNumberCount = safeGetStorage('multimail_num_count_v2', 3);
         let numberSliderVisible = false;
         let sliderAutoHideTimer = null;
-        let randomDigitPool = generateDigitPool();
+        let randomDigitPool = generateDigitPool('');
 
-        function generateDigitPool() {
+        function generateDigitPool(prevPool = '') {
             let s = '';
-            for (let i = 0; i < 10; i++) {
-                s += Math.floor(Math.random() * 10).toString();
-            }
-            if (s[0] === '0') s = String(Math.floor(1 + Math.random() * 9)) + s.slice(1);
+            let attempts = 0;
+            const prevComparable = String(prevPool || '').slice(0, 4);
+            do {
+                s = '';
+                for (let i = 0; i < 10; i++) {
+                    s += Math.floor(Math.random() * 10).toString();
+                }
+                if (s[0] === '0') s = String(Math.floor(1 + Math.random() * 9)) + s.slice(1);
+                attempts++;
+            } while (prevComparable && s.slice(0, 4) === prevComparable && attempts < 12);
             return s;
         }
 
@@ -3748,7 +5035,7 @@ Security Team</textarea>
             useTrailingNumbers = !useTrailingNumbers;
             clearTimeout(sliderAutoHideTimer);
             if (useTrailingNumbers) {
-                if (!randomDigitPool) randomDigitPool = generateDigitPool();
+                randomDigitPool = generateDigitPool(randomDigitPool);
                 numberSliderVisible = true;
             } else {
                 numberSliderVisible = false;
@@ -3767,8 +5054,10 @@ Security Team</textarea>
         }
 
         function rerollTrailingNumbers() {
-            randomDigitPool = generateDigitPool();
+            clearTimeout(sliderAutoHideTimer);
+            randomDigitPool = generateDigitPool(randomDigitPool);
             applyModifiersToInput();
+            showToast(`Changed random digits to ${randomDigitPool.slice(0, trailingNumberCount)}!`, 'info');
         }
 
         function checkAvailability() {
@@ -3781,7 +5070,7 @@ Security Team</textarea>
                 return;
             }
 
-            const selectedDom = document.getElementById('domainSelect').value || defaultDomain;
+            const selectedDom = document.getElementById('domainSelect').value || getActiveDefaultDomain();
             const fullEmail = handle + selectedDom;
             const encodedEmail = encodeEmailForFirebase(fullEmail);
 
@@ -3792,7 +5081,7 @@ Security Team</textarea>
             clearTimeout(checkTimeout);
             checkTimeout = setTimeout(() => {
                 if (!database) {
-                    availabilityStatus.innerHTML = '<i class="fa-solid fa-circle-check"></i> Username is available';
+                    availabilityStatus.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${domainMode === 'real' ? 'Live address ready to register' : 'Username is available'}`;
                     availabilityStatus.className = 'status-msg status-available';
                     createMailBtn.disabled = false;
                     return;
@@ -3800,7 +5089,6 @@ Security Team</textarea>
                 database.ref('registered_emails/' + encodedEmail).once('value')
                     .then((snapshot) => {
                         if (snapshot.exists()) {
-                            // Username is taken! Lock the Name box now so if user appends extra letters/numbers (like xx or 123), the Name box stays clean
                             if (currentRawName.trim().length > 0) {
                                 isNameLocked = true;
                             }
@@ -3808,7 +5096,7 @@ Security Team</textarea>
                             availabilityStatus.className = 'status-msg status-taken';
                             createMailBtn.disabled = true;
                         } else {
-                            availabilityStatus.innerHTML = '<i class="fa-solid fa-circle-check"></i> Username is available!';
+                            availabilityStatus.innerHTML = `<i class="fa-solid fa-circle-check"></i> ${domainMode === 'real' ? 'Available on Real-Time Server!' : 'Username is available!'}`;
                             availabilityStatus.className = 'status-msg status-available';
                             createMailBtn.disabled = false;
                         }
@@ -3821,7 +5109,6 @@ Security Team</textarea>
             }, 260);
         }
 
-        // Handle paste directly: sets smart Title Case human name in #enteredNameDisplay and locks it
         nameInput.addEventListener('paste', function(e) {
             e.preventDefault();
             const pasted = (e.clipboardData || window.clipboardData).getData('text') || '';
@@ -3832,6 +5119,7 @@ Security Team</textarea>
                 if (replacingAll) {
                     currentRawName = pureName;
                     manualUsernameExtra = '';
+                    randomDigitPool = generateDigitPool(randomDigitPool);
                 } else {
                     currentRawName = formatSmartHumanName(currentRawName + ' ' + pureName);
                 }
@@ -3847,14 +5135,9 @@ Security Team</textarea>
             checkAvailability();
         });
 
-        // Smart manual typing & input handler:
-        // - Automatically segments concatenated lowercase names ("alexjack" -> "Alex Jack", "tawsifahamedshuvo" -> "Tawsif Ahamed Shuvo")
-        // - Capitalizes first letter of each name word in #enteredNameDisplay
-        // - Keeps #nameInput formatted as a valid lowercase username (with optional dots & numbers)
         nameInput.addEventListener('input', function() {
             const rawVal = this.value;
 
-            // Strip any auto-applied trailing number suffix before comparing what the user typed
             let rawWithoutAutoNum = rawVal;
             if (lastAppliedNumSuffix && rawWithoutAutoNum.endsWith(lastAppliedNumSuffix)) {
                 rawWithoutAutoNum = rawWithoutAutoNum.slice(0, -lastAppliedNumSuffix.length);
@@ -3870,30 +5153,31 @@ Security Team</textarea>
                 manualUsernameExtra = '';
                 lastAppliedNumSuffix = '';
                 isNameLocked = false;
+                randomDigitPool = generateDigitPool(randomDigitPool);
                 this.value = '';
                 enteredNameDisplay.value = '';
                 checkAvailability();
                 return;
             }
 
-            // Case 1: User typed/appended characters at the end of the name/handle
+            if (!prevWithoutAutoNum.trim()) {
+                randomDigitPool = generateDigitPool(randomDigitPool);
+            }
+
             if (rawWithoutAutoNum.startsWith(prevWithoutAutoNum) && rawWithoutAutoNum.length >= prevWithoutAutoNum.length) {
                 const addedRaw = rawWithoutAutoNum.slice(prevWithoutAutoNum.length);
 
-                // If user manually typed a digit (0-9), lock the Name box so digits/suffixes only go to username
                 if (/[0-9]/.test(addedRaw) && currentRawName.trim().length > 0) {
                     isNameLocked = true;
                 }
 
                 if (!isNameLocked) {
-                    // Convert manual dot or space into a word boundary in currentRawName
                     const normalizedAdded = addedRaw.replace(/\./g, ' ');
                     const humanPart = sanitizeHumanNameOnly(normalizedAdded);
                     currentRawName += humanPart;
                     enteredNameDisplay.value = formatSmartHumanName(currentRawName);
 
                     const computed = buildUsernameFromState(rawWithoutAutoNum);
-                    // Preserve trailing manual dot in #nameInput while user is typing "alex."
                     const finalHandle = (rawWithoutAutoNum.endsWith('.') && !computed.includes('.'))
                         ? formatEmailHandle(rawWithoutAutoNum + lastAppliedNumSuffix)
                         : computed;
@@ -3905,7 +5189,6 @@ Security Team</textarea>
                     setInputWithCursorBeforeSuffix(this, newHandle, lastAppliedNumSuffix);
                 }
             } else if (prevWithoutAutoNum.startsWith(rawWithoutAutoNum)) {
-                // Case 2: User pressed Backspace to delete characters
                 const deletedCount = prevWithoutAutoNum.length - rawWithoutAutoNum.length;
 
                 if (manualUsernameExtra.length > 0) {
@@ -3933,7 +5216,6 @@ Security Team</textarea>
                     }
                 }
             } else {
-                // Case 3: User edited in the middle or replaced text
                 const cleanHandle = formatEmailHandle(rawWithoutAutoNum);
                 if (!isNameLocked && !/[0-9]/.test(rawWithoutAutoNum)) {
                     currentRawName = sanitizeHumanNameOnly(rawWithoutAutoNum.replace(/\./g, ' ')).trimStart();
@@ -3946,7 +5228,6 @@ Security Team</textarea>
                 }
             }
 
-            // Failsafe: ensure #enteredNameDisplay always shows the formatted Title Case name
             if (currentRawName.trim()) {
                 enteredNameDisplay.value = formatSmartHumanName(currentRawName);
             } else {
@@ -3967,7 +5248,7 @@ Security Team</textarea>
             currentRawName = rawAlias;
             manualUsernameExtra = '';
             isNameLocked = true;
-            randomDigitPool = generateDigitPool();
+            randomDigitPool = generateDigitPool(randomDigitPool);
 
             enteredNameDisplay.value = rawAlias;
             const computed = buildUsernameFromState();
@@ -3982,9 +5263,71 @@ Security Team</textarea>
             }
         }
 
-        function createMail(skipFirebaseCheck = false) {
+        async function registerOrLoginMailTmAccount(cleanHost, address, password) {
+            // 1. Try creating the account on Mail.tm / Mail.gw
+            const createRes = await fetchWithTimeout(`https://${cleanHost}/accounts`, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ address, password })
+            }, 6000);
+
+            if (createRes.status === 422 || createRes.status === 400) {
+                let errText = '';
+                try {
+                    const errJson = await createRes.json();
+                    errText = JSON.stringify(errJson).toLowerCase();
+                } catch (e) {}
+
+                if (errText.includes('domain')) {
+                    return { status: 'invalid_domain' };
+                }
+
+                // Maybe the user already created this address earlier with this password; try logging in
+                try {
+                    const loginRes = await fetchWithTimeout(`https://${cleanHost}/token`, {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ address, password })
+                    }, 5000);
+                    if (loginRes.ok) {
+                        const loginData = await loginRes.json();
+                        if (loginData && loginData.token) {
+                            return { status: 'ok', token: loginData.token };
+                        }
+                    }
+                } catch (e) {}
+
+                return { status: 'taken' };
+            }
+
+            if (createRes.ok) {
+                const tokenRes = await fetchWithTimeout(`https://${cleanHost}/token`, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ address, password })
+                }, 6000);
+                if (tokenRes.ok) {
+                    const tokenData = await tokenRes.json();
+                    if (tokenData && tokenData.token) {
+                        return { status: 'ok', token: tokenData.token };
+                    }
+                }
+            }
+            return { status: 'error' };
+        }
+
+        async function createMail(skipFirebaseCheck = false) {
             const rawName = (enteredNameDisplay.value || currentRawName || nameInput.value).trim();
-            const handle = formatEmailHandle(nameInput.value || buildUsernameFromState());
+            let handle = formatEmailHandle(nameInput.value || buildUsernameFromState());
 
             if (!handle) {
                 showToast('Please enter a name first!', 'warning');
@@ -3992,17 +5335,120 @@ Security Team</textarea>
                 return;
             }
 
-            const selectedDom = document.getElementById('domainSelect').value || defaultDomain;
-            const fullEmail = handle + selectedDom;
-            const encodedEmail = encodeEmailForFirebase(fullEmail);
+            let selectedDom = document.getElementById('domainSelect').value || getActiveDefaultDomain();
+            let fullEmail = handle + selectedDom;
+            const recoveryKit = generateRecoveryKitCode();
 
             createMailBtn.disabled = true;
-            createMailBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Creating...';
+            createMailBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Creating Live Mailbox...';
+
+            let liveTokenObj = null;
+
+            if (domainMode === 'real') {
+                // Ensure we know the provider for selectedDom; if not synced yet, sync first
+                let apiBase = realDomainProviderMap[selectedDom];
+                if (!apiBase) {
+                    await fetchRealtimeDomainsFromApi(false);
+                    selectedDom = document.getElementById('domainSelect').value || getActiveDefaultDomain();
+                    apiBase = realDomainProviderMap[selectedDom] || 'api.maildrop.cc';
+                    fullEmail = handle + selectedDom;
+                }
+
+                const instantProviders = ['tempmail.plus', 'api.maildrop.cc'];
+                if (instantProviders.includes(apiBase)) {
+                    liveTokenObj = {
+                        token: `${apiBase}_live`,
+                        apiBase: apiBase,
+                        password: recoveryKit
+                    };
+                    liveMailTokens[fullEmail] = liveTokenObj;
+                    safeSetStorage('multimail_live_tokens_v2', liveMailTokens);
+                } else {
+                    // Mail.tm / Mail.gw account registration with automatic collision resolution
+                    const cleanHost = apiBase.replace(/^https?:\/\//, '');
+                    try {
+                        let regResult = await registerOrLoginMailTmAccount(cleanHost, fullEmail, recoveryKit);
+
+                        if (regResult.status === 'invalid_domain') {
+                            await fetchRealtimeDomainsFromApi(false);
+                            selectedDom = getActiveDefaultDomain();
+                            document.getElementById('domainSelect').value = selectedDom;
+                            document.getElementById('selectedDomainText').innerText = selectedDom;
+                            fullEmail = handle + selectedDom;
+                            const newHost = (realDomainProviderMap[selectedDom] || 'api.mail.tm').replace(/^https?:\/\//, '');
+                            if (newHost === 'api.mail.tm' || newHost === 'api.mail.gw') {
+                                regResult = await registerOrLoginMailTmAccount(newHost, fullEmail, recoveryKit);
+                            }
+                        }
+
+                        // If username is already taken on public Mail.tm / Mail.gw server, auto-reroll digits so creation succeeds
+                        if (regResult.status === 'taken') {
+                            let baseHandle = handle;
+                            if (lastAppliedNumSuffix && baseHandle.endsWith(lastAppliedNumSuffix)) {
+                                baseHandle = baseHandle.slice(0, -lastAppliedNumSuffix.length);
+                            } else {
+                                baseHandle = baseHandle.replace(/\d+$/, '') || handle;
+                            }
+                            for (let retry = 0; retry < 3 && regResult.status === 'taken'; retry++) {
+                                randomDigitPool = generateDigitPool(randomDigitPool);
+                                const retryDigits = randomDigitPool.slice(0, Math.max(3, trailingNumberCount));
+                                handle = formatEmailHandle(baseHandle + retryDigits);
+                                fullEmail = handle + selectedDom;
+                                regResult = await registerOrLoginMailTmAccount(cleanHost, fullEmail, recoveryKit);
+                            }
+                        }
+
+                        if (regResult.status === 'ok' && regResult.token) {
+                            liveTokenObj = {
+                                token: regResult.token,
+                                apiBase: cleanHost,
+                                password: recoveryKit
+                            };
+                            liveMailTokens[fullEmail] = liveTokenObj;
+                            safeSetStorage('multimail_live_tokens_v2', liveMailTokens);
+                        } else {
+                            // Automatic failover to @maildrop.cc if Mail.tm/Mail.gw rate-limited (HTTP 429) or unreachable
+                            selectedDom = '@maildrop.cc';
+                            document.getElementById('domainSelect').value = selectedDom;
+                            document.getElementById('selectedDomainText').innerText = selectedDom;
+                            fullEmail = handle + selectedDom;
+                            liveTokenObj = {
+                                token: 'api.maildrop.cc_live',
+                                apiBase: 'api.maildrop.cc',
+                                password: recoveryKit
+                            };
+                            liveMailTokens[fullEmail] = liveTokenObj;
+                            safeSetStorage('multimail_live_tokens_v2', liveMailTokens);
+                        }
+                    } catch (err) {
+                        // Failover to @maildrop.cc which works without account creation via CORS GraphQL
+                        selectedDom = '@maildrop.cc';
+                        document.getElementById('domainSelect').value = selectedDom;
+                        document.getElementById('selectedDomainText').innerText = selectedDom;
+                        fullEmail = handle + selectedDom;
+                        liveTokenObj = {
+                            token: 'api.maildrop.cc_live',
+                            apiBase: 'api.maildrop.cc',
+                            password: recoveryKit
+                        };
+                        liveMailTokens[fullEmail] = liveTokenObj;
+                        safeSetStorage('multimail_live_tokens_v2', liveMailTokens);
+                    }
+                }
+            }
+
+            const encodedEmail = encodeEmailForFirebase(fullEmail);
 
             const finalizeCreation = () => {
-                // Save exact entered name (with uppercase & spaces) mapped to this email
+                // Always generate a fresh random digit pool for the NEXT email so numbers auto-change every time!
+                randomDigitPool = generateDigitPool(randomDigitPool);
+                lastAppliedNumSuffix = '';
+
                 savedMailNames[fullEmail] = rawName;
                 safeSetStorage('multimail_saved_names_v2', savedMailNames);
+
+                savedRecoveryKits[fullEmail] = recoveryKit;
+                safeSetStorage('multimail_recovery_kits_v2', savedRecoveryKits);
 
                 if (!savedMails.includes(fullEmail)) {
                     savedMails.unshift(fullEmail);
@@ -4020,17 +5466,26 @@ Security Team</textarea>
                 createMailBtn.disabled = false;
                 availabilityStatus.innerHTML = '';
 
-                seedWelcomeEmailIfEmpty(fullEmail);
-                showToast(`Created ${fullEmail}!`, 'success');
+                seedWelcomeEmailIfEmpty(fullEmail, recoveryKit);
+                if (domainMode === 'real') {
+                    pollLiveApiMessages(fullEmail, true);
+                }
+                showToast(`Created ${fullEmail} + Recovery Kit (${recoveryKit})!`, 'success');
+            };
+
+            const firebasePayload = {
+                email: fullEmail,
+                rawName: rawName,
+                recoveryKit: recoveryKit,
+                mode: domainMode,
+                apiBase: liveTokenObj ? liveTokenObj.apiBase : null,
+                token: liveTokenObj ? liveTokenObj.token : null,
+                createdAt: firebase.database ? firebase.database.ServerValue.TIMESTAMP : Date.now()
             };
 
             if (!database || skipFirebaseCheck) {
                 if (database) {
-                    database.ref('registered_emails/' + encodedEmail).set({
-                        email: fullEmail,
-                        rawName: rawName,
-                        createdAt: firebase.database.ServerValue.TIMESTAMP
-                    }).catch(() => {});
+                    database.ref('registered_emails/' + encodedEmail).set(firebasePayload).catch(() => {});
                 }
                 finalizeCreation();
                 return;
@@ -4038,16 +5493,12 @@ Security Team</textarea>
 
             database.ref('registered_emails/' + encodedEmail).once('value')
                 .then((snapshot) => {
-                    if (snapshot.exists()) {
+                    if (snapshot.exists() && domainMode !== 'real') {
                         showToast('Username is already taken! Try another.', 'error');
                         createMailBtn.innerHTML = '<i class="fa-solid fa-plus"></i> Create Mail Address';
                         checkAvailability();
                     } else {
-                        database.ref('registered_emails/' + encodedEmail).set({
-                            email: fullEmail,
-                            rawName: rawName,
-                            createdAt: firebase.database.ServerValue.TIMESTAMP
-                        }).finally(finalizeCreation);
+                        database.ref('registered_emails/' + encodedEmail).set(firebasePayload).finally(finalizeCreation);
                     }
                 })
                 .catch(finalizeCreation);
@@ -4057,18 +5508,33 @@ Security Team</textarea>
             activeEmail = email;
             safeSetStorage('multimail_active_email_v2', activeEmail);
 
+            const kitInput = document.getElementById('activeRecoveryKitInput');
+            const timerLabel = document.getElementById('activeMailTimer');
+
             if (activeEmail) {
                 generatedMail.value = activeEmail;
-                workspace.style.display = 'block';
-                inputSection.style.display = 'none';
-                // Show the exact input name that was used to create this email
+                const kit = ensureRecoveryKitForEmail(activeEmail);
+                if (kitInput) kitInput.value = kit;
+
+                const domPart = '@' + activeEmail.split('@')[1];
+                const isLive = isRealDomainExtension(domPart) || Boolean(liveMailTokens[activeEmail]);
+                if (timerLabel) {
+                    timerLabel.innerText = isLive ? 'Real-Time API Inbox' : 'Demo Sandbox Inbox';
+                }
+
+                if (!isRecoverViewOpen) {
+                    workspace.style.display = 'block';
+                    inputSection.style.display = 'none';
+                }
                 const exactSavedName = savedMailNames[activeEmail] !== undefined
                     ? savedMailNames[activeEmail]
                     : activeEmail.split('@')[0];
                 enteredNameDisplay.value = exactSavedName;
             } else {
-                workspace.style.display = 'none';
-                inputSection.style.display = 'block';
+                if (!isRecoverViewOpen) {
+                    workspace.style.display = 'none';
+                    inputSection.style.display = 'block';
+                }
                 enteredNameDisplay.value = nameInput.value || '';
             }
 
@@ -4076,6 +5542,9 @@ Security Team</textarea>
             closeEmailDetail();
             renderInboxForActiveEmail();
             attachFirebaseInboxListener(activeEmail);
+            if (activeEmail) {
+                pollLiveApiMessages(activeEmail, true);
+            }
         }
 
         function copyEnteredName() {
@@ -4103,9 +5572,21 @@ Security Team</textarea>
             savedMails.forEach(mail => {
                 const isCurrent = (mail === activeEmail);
                 const rawLabel = savedMailNames[mail] || mail.split('@')[0];
+                const kit = ensureRecoveryKitForEmail(mail);
+                const domPart = '@' + mail.split('@')[1];
+                const isLive = isRealDomainExtension(domPart) || Boolean(liveMailTokens[mail]);
+
                 const row = document.createElement('div');
                 row.className = `saved-mail-item ${isCurrent ? 'active-account' : ''}`;
                 row.onclick = () => {
+                    if (isRecoverViewOpen) {
+                        const recEmail = document.getElementById('recoverEmailInput');
+                        const recKit = document.getElementById('recoverKitInput');
+                        if (recEmail) recEmail.value = mail;
+                        if (recKit) recKit.value = kit;
+                        showToast(`Filled ${mail} & Recovery Kit in Recover form!`, 'info');
+                        return;
+                    }
                     setActiveEmail(mail);
                     showToast(`Switched inbox to ${mail}`, 'info');
                 };
@@ -4116,9 +5597,13 @@ Security Team</textarea>
                             ${isCurrent ? '<i class="fa-solid fa-circle-dot" style="color: var(--primary); margin-right: 5px;"></i>' : ''}
                             ${escapeHtml(mail)}
                         </div>
-                        <div class="saved-mail-rawname">Name: <strong>${escapeHtml(rawLabel)}</strong></div>
+                        <div class="saved-mail-rawname">
+                            <span class="mode-pill-tag ${isLive ? 'real' : 'demo'}" style="font-size: 9px; padding: 1px 5px; margin-right: 4px;">${isLive ? 'LIVE' : 'DEMO'}</span>
+                            Name: <strong>${escapeHtml(rawLabel)}</strong> &bull; Kit: <span class="mono">${escapeHtml(kit)}</span>
+                        </div>
                     </div>
                     <div class="saved-mail-btns">
+                        <button class="icon-mini-btn" onclick="event.stopPropagation(); copyTextValue('${escapeJsStr(kit)}', 'Copied Recovery Kit: ${escapeJsStr(kit)}')" title="Copy Recovery Kit"><i class="fa-solid fa-key"></i></button>
                         <button class="icon-mini-btn" onclick="event.stopPropagation(); copyTextValue('${escapeJsStr(mail)}', 'Copied ${escapeJsStr(mail)}!')" title="Copy Email"><i class="fa-regular fa-copy"></i></button>
                         <button class="icon-mini-btn danger" onclick="event.stopPropagation(); deleteSavedMail('${escapeJsStr(mail)}')" title="Remove"><i class="fa-regular fa-trash-can"></i></button>
                     </div>
@@ -4150,7 +5635,6 @@ Security Team</textarea>
         }
 
         function resetMail() {
-            // Remove welcome mail from previous active email when clicking New Mail
             if (activeEmail && inboxStore[activeEmail]) {
                 inboxStore[activeEmail] = inboxStore[activeEmail].filter(
                     m => !m.isWelcome && m.sender !== 'welcome@multimail.studio'
@@ -4159,8 +5643,20 @@ Security Team</textarea>
             }
             activeEmail = '';
             safeSetStorage('multimail_active_email_v2', '');
+            isRecoverViewOpen = false;
+            recoverEmailSection.style.display = 'none';
             workspace.style.display = 'none';
             inputSection.style.display = 'block';
+            const helperNameBox = document.getElementById('helperNameBox');
+            const helperPwdBox = document.getElementById('helperPwdBox');
+            if (helperNameBox) helperNameBox.style.display = 'block';
+            if (helperPwdBox) helperPwdBox.style.display = 'block';
+            const recoverBtn = document.getElementById('recoverToggleBtn');
+            const recoverBtnText = document.getElementById('recoverToggleBtnText');
+            if (recoverBtn) recoverBtn.classList.remove('active-mode');
+            if (recoverBtnText) recoverBtnText.innerText = 'Recover Email';
+
+            randomDigitPool = generateDigitPool(randomDigitPool);
             nameInput.value = '';
             enteredNameDisplay.value = '';
             currentRawName = '';
@@ -4248,7 +5744,6 @@ Security Team</textarea>
             showToast('Generated new Sandbox API key!', 'success');
         }
 
-        // Deterministic SVG QR Matrix Generator
         function openQrModal() {
             if (!activeEmail) {
                 showToast('Please create an email first!', 'warning');
@@ -4295,20 +5790,21 @@ Security Team</textarea>
         }
 
         // ==========================================
-        // 8. REAL-TIME INBOX, CLEAR INBOX & SINGLE DELETE
+        // 8. REAL-TIME INBOX (LIVE API POLLING + FIREBASE SYNC)
         // ==========================================
         let inboxStore = safeGetStorage('multimail_inboxes_v2', {});
         let activeMessageId = null;
         let currentFirebaseRef = null;
-        let countdownSeconds = 10;
+        let countdownSeconds = 5;
 
-        function seedWelcomeEmailIfEmpty(email) {
+        function seedWelcomeEmailIfEmpty(email, kitCode = '') {
+            const kit = kitCode || ensureRecoveryKitForEmail(email);
             if (!inboxStore[email]) {
                 inboxStore[email] = [{
                     id: 'msg_' + Date.now(),
                     sender: 'welcome@multimail.studio',
-                    subject: 'Welcome to MultiMail Studio — Inbox Ready!',
-                    body: `Hi there,\n\nYour MultiMail address (${email}) is live and ready to receive messages.\n\nQuick Test Code: 582910\n\nTip: Click "Simulate OTP Mail" or "Test Mail" in the top bar anytime to test incoming verification emails.`,
+                    subject: `Welcome to MultiMail — Recovery Kit: ${kit}`,
+                    body: `Hi there,\n\nYour MultiMail address (${email}) is active and ready to receive messages.\n\n🔑 Your Recovery Kit Key: ${kit}\nSave this Email + Recovery Kit so you can re-access this inbox anytime using the "Recover Email" button.\n\nQuick Test OTP Code: 582910`,
                     time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
                     unread: true,
                     isWelcome: true
@@ -4318,10 +5814,333 @@ Security Team</textarea>
             }
         }
 
+        function htmlToReadableText(rawHtml) {
+            if (!rawHtml) return '';
+            const combined = Array.isArray(rawHtml) ? rawHtml.join('\n') : String(rawHtml);
+            try {
+                const doc = new DOMParser().parseFromString(combined, 'text/html');
+                doc.querySelectorAll('style, script, head').forEach(el => el.remove());
+                return (doc.body ? doc.body.innerText : combined).replace(/\n{3,}/g, '\n\n').trim();
+            } catch (e) {
+                return combined.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+            }
+        }
+
+        async function pollLiveApiMessages(email, silent = true) {
+            if (!email || !email.includes('@')) return;
+            const [handlePart, domRaw] = email.split('@');
+            const domPart = '@' + domRaw;
+
+            const providerHost = realDomainProviderMap[domPart] || DEFAULT_PROVIDER_MAP[domPart] || 'api.mail.tm';
+
+            // 0A. Poll Tempmail.plus / Mailto.plus API (@mailto.plus, @fexpost.com, @fexbox.org, @mailbox.in.ua, @rover.info, @chitthi.in, @fextemp.com)
+            if (providerHost === 'tempmail.plus') {
+                try {
+                    const listUrl = `https://tempmail.plus/api/mails?email=${encodeURIComponent(email)}&limit=20&epin=`;
+                    const tpData = await smartGetJson(listUrl);
+                    const mailList = (tpData && Array.isArray(tpData.mail_list)) ? tpData.mail_list : [];
+                    if (mailList.length > 0) {
+                        if (!inboxStore[email]) inboxStore[email] = [];
+                        let addedTp = false;
+                        for (const item of mailList) {
+                            const msgId = 'tp_' + item.mail_id;
+                            if (!inboxStore[email].some(m => m.id === msgId)) {
+                                let fullBody = item.subject || 'New message';
+                                const detailUrl = `https://tempmail.plus/api/mails/${item.mail_id}?email=${encodeURIComponent(email)}&epin=`;
+                                const detailObj = await smartGetJson(detailUrl);
+                                if (detailObj) {
+                                    fullBody = (detailObj.text || '').trim() || htmlToReadableText(detailObj.html) || fullBody;
+                                }
+                                inboxStore[email].unshift({
+                                    id: msgId,
+                                    remoteId: item.mail_id,
+                                    sender: item.from_mail || item.from_name || 'external@sender.org',
+                                    subject: item.subject || '(No Subject)',
+                                    body: fullBody,
+                                    time: item.time || new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                                    unread: true
+                                });
+                                addedTp = true;
+                            }
+                        }
+                        if (addedTp) {
+                            safeSetStorage('multimail_inboxes_v2', inboxStore);
+                            renderInboxForActiveEmail();
+                            showToast(`New real-time email arrived in ${email}!`, 'success');
+                        }
+                    }
+                } catch (e) {}
+                return;
+            }
+
+            // 0B. Poll GuerrillaMail API (@sharklasers.com, @grr.la, @guerrillamail.com, @pokemail.net)
+            if (providerHost === 'api.guerrillamail.com') {
+                try {
+                    let sid = liveMailTokens[email]?.token;
+                    if (!sid || sid === 'guerrilla_live') {
+                        const initGm = await smartGetJson(`https://api.guerrillamail.com/ajax.php?f=set_email_user&email_user=${encodeURIComponent(handlePart)}&lang=en`);
+                        if (initGm && initGm.sid_token) {
+                            sid = initGm.sid_token;
+                            liveMailTokens[email] = { token: sid, apiBase: 'api.guerrillamail.com', password: savedRecoveryKits[email] || '' };
+                            safeSetStorage('multimail_live_tokens_v2', liveMailTokens);
+                        }
+                    }
+                    if (sid) {
+                        const gmListObj = await smartGetJson(`https://api.guerrillamail.com/ajax.php?f=get_email_list&offset=0&sid_token=${encodeURIComponent(sid)}`);
+                        const gmList = (gmListObj && Array.isArray(gmListObj.list)) ? gmListObj.list : [];
+                        if (!inboxStore[email]) inboxStore[email] = [];
+                        let addedGm = false;
+                        for (const item of gmList) {
+                            if (String(item.mail_from || '').includes('guerrillamail.com') && String(item.mail_subject || '').toLowerCase().includes('welcome')) continue;
+                            const msgId = 'gm_' + item.mail_id;
+                            if (!inboxStore[email].some(m => m.id === msgId)) {
+                                let fullBody = item.mail_excerpt || item.mail_subject || '';
+                                const gmDetail = await smartGetJson(`https://api.guerrillamail.com/ajax.php?f=fetch_email&email_id=${encodeURIComponent(item.mail_id)}&sid_token=${encodeURIComponent(sid)}`);
+                                if (gmDetail && gmDetail.mail_body) {
+                                    fullBody = htmlToReadableText(gmDetail.mail_body) || fullBody;
+                                }
+                                inboxStore[email].unshift({
+                                    id: msgId,
+                                    remoteId: item.mail_id,
+                                    sender: item.mail_from || 'external@sender.org',
+                                    subject: item.mail_subject || '(No Subject)',
+                                    body: fullBody,
+                                    time: item.mail_date || new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                                    unread: true
+                                });
+                                addedGm = true;
+                            }
+                        }
+                        if (addedGm) {
+                            safeSetStorage('multimail_inboxes_v2', inboxStore);
+                            renderInboxForActiveEmail();
+                            showToast(`New real-time email arrived in ${email}!`, 'success');
+                        }
+                    }
+                } catch (e) {}
+                return;
+            }
+
+            // 0C. If domain is on 1secMail (www.1secmail.com), poll via 1secMail API
+            if (realDomainProviderMap[domPart] === 'www.1secmail.com') {
+                try {
+                    const listUrl = `https://www.1secmail.com/api/v1/?action=getMessages&login=${encodeURIComponent(handlePart)}&domain=${encodeURIComponent(domRaw)}`;
+                    const msgList = await smartGetJson(listUrl);
+                    if (Array.isArray(msgList)) {
+                        if (!inboxStore[email]) inboxStore[email] = [];
+                        let added1Sec = false;
+                        for (const item of msgList) {
+                            const msgId = '1sec_' + item.id;
+                            if (!inboxStore[email].some(m => m.id === msgId)) {
+                                let fullBody = item.subject || 'New message';
+                                const readUrl = `https://www.1secmail.com/api/v1/?action=readMessage&login=${encodeURIComponent(handlePart)}&domain=${encodeURIComponent(domRaw)}&id=${item.id}`;
+                                const detailObj = await smartGetJson(readUrl);
+                                if (detailObj) {
+                                    fullBody = (detailObj.textBody || '').trim() || htmlToReadableText(detailObj.htmlBody || detailObj.body) || fullBody;
+                                }
+                                inboxStore[email].unshift({
+                                    id: msgId,
+                                    remoteId: item.id,
+                                    sender: item.from || 'external@sender.org',
+                                    subject: item.subject || '(No Subject)',
+                                    body: fullBody,
+                                    time: item.date ? item.date.split(' ')[1] || item.date : new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                                    unread: true
+                                });
+                                added1Sec = true;
+                            }
+                        }
+                        if (added1Sec) {
+                            safeSetStorage('multimail_inboxes_v2', inboxStore);
+                            renderInboxForActiveEmail();
+                            showToast(`New real-time email arrived in ${email}!`, 'success');
+                        }
+                    }
+                } catch (e) {}
+                return;
+            }
+
+            // 1. If domain is @maildrop.cc, poll via Maildrop GraphQL API
+            if (domPart === '@maildrop.cc' || realDomainProviderMap[domPart] === 'api.maildrop.cc') {
+                try {
+                    const gqlRes = await fetchWithTimeout('https://api.maildrop.cc/graphql', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            query: 'query ($mailbox: String!) { inbox(mailbox: $mailbox) { id headerfrom subject date } }',
+                            variables: { mailbox: handlePart }
+                        })
+                    });
+                    if (gqlRes.ok) {
+                        const gqlData = await gqlRes.json();
+                        const inboxList = (gqlData && gqlData.data && Array.isArray(gqlData.data.inbox)) ? gqlData.data.inbox : [];
+                        if (!inboxStore[email]) inboxStore[email] = [];
+                        let addedMd = false;
+                        for (const item of inboxList) {
+                            const msgId = 'md_' + item.id;
+                            if (!inboxStore[email].some(m => m.id === msgId)) {
+                                let fullBody = item.subject || 'New message';
+                                try {
+                                    const msgRes = await fetch('https://api.maildrop.cc/graphql', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Accept': 'application/json',
+                                            'Content-Type': 'application/json'
+                                        },
+                                        body: JSON.stringify({
+                                            query: 'query ($mailbox: String!, $id: String!) { message(mailbox: $mailbox, id: $id) { id headerfrom subject date data html } }',
+                                            variables: { mailbox: handlePart, id: item.id }
+                                        })
+                                    });
+                                    if (msgRes.ok) {
+                                        const msgJson = await msgRes.json();
+                                        const msgObj = msgJson?.data?.message;
+                                        if (msgObj) {
+                                            fullBody = htmlToReadableText(msgObj.html) || msgObj.data || fullBody;
+                                        }
+                                    }
+                                } catch (e) {}
+
+                                inboxStore[email].unshift({
+                                    id: msgId,
+                                    remoteId: item.id,
+                                    sender: item.headerfrom || 'external@sender.org',
+                                    subject: item.subject || '(No Subject)',
+                                    body: fullBody,
+                                    time: item.date ? new Date(item.date).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                                    unread: true
+                                });
+                                addedMd = true;
+                            }
+                        }
+                        if (addedMd) {
+                            safeSetStorage('multimail_inboxes_v2', inboxStore);
+                            renderInboxForActiveEmail();
+                            showToast(`New real-time email arrived in ${email}!`, 'success');
+                        }
+                    }
+                } catch (e) {}
+                return;
+            }
+
+            // 2. Poll Mail.tm / Mail.gw REST API (with automatic self-healing token & account registration)
+            let session = liveMailTokens[email];
+            const mappedHost = (realDomainProviderMap[domPart] || 'api.mail.tm').replace(/^https?:\/\//, '');
+            const isPlaceholderToken = !session || !session.token || String(session.token).endsWith('_live');
+
+            if (isPlaceholderToken && (mappedHost === 'api.mail.tm' || mappedHost === 'api.mail.gw')) {
+                const kitPwd = ensureRecoveryKitForEmail(email);
+                try {
+                    const healResult = await registerOrLoginMailTmAccount(mappedHost, email, kitPwd);
+                    if (healResult.status === 'ok' && healResult.token) {
+                        session = { token: healResult.token, apiBase: mappedHost, password: kitPwd };
+                        liveMailTokens[email] = session;
+                        safeSetStorage('multimail_live_tokens_v2', liveMailTokens);
+                    }
+                } catch (e) {}
+            }
+
+            if (!session || !session.token || String(session.token).endsWith('_live')) return;
+
+            try {
+                const cleanHost = session.apiBase.replace(/^https?:\/\//, '');
+                let res = await fetchWithTimeout(`https://${cleanHost}/messages?page=1`, {
+                    headers: {
+                        'Accept': 'application/json',
+                        'Authorization': `Bearer ${session.token}`
+                    }
+                }, 5000);
+
+                // If JWT token expired (401), re-authenticate using saved password/Recovery Kit
+                if (res.status === 401) {
+                    const pwd = session.password || ensureRecoveryKitForEmail(email);
+                    const reAuth = await registerOrLoginMailTmAccount(cleanHost, email, pwd);
+                    if (reAuth.status === 'ok' && reAuth.token) {
+                        session.token = reAuth.token;
+                        liveMailTokens[email] = session;
+                        safeSetStorage('multimail_live_tokens_v2', liveMailTokens);
+                        res = await fetchWithTimeout(`https://${cleanHost}/messages?page=1`, {
+                            headers: {
+                                'Accept': 'application/json',
+                                'Authorization': `Bearer ${session.token}`
+                            }
+                        }, 5000);
+                    }
+                }
+
+                if (!res.ok) return;
+                const data = await res.json();
+                const list = extractApiItemsList(data);
+                if (!inboxStore[email]) inboxStore[email] = [];
+
+                let addedNew = false;
+                for (const item of list) {
+                    const msgId = 'live_' + item.id;
+                    if (!inboxStore[email].some(m => m.id === msgId)) {
+                        let fullBody = item.intro || 'No message content';
+                        try {
+                            const detailRes = await fetchWithTimeout(`https://${cleanHost}/messages/${item.id}`, {
+                                headers: {
+                                    'Accept': 'application/json',
+                                    'Authorization': `Bearer ${session.token}`
+                                }
+                            });
+                            if (detailRes.ok) {
+                                const detailData = await detailRes.json();
+                                const textPart = (detailData.text || '').trim();
+                                const htmlPart = htmlToReadableText(detailData.html);
+                                fullBody = textPart || htmlPart || detailData.intro || fullBody;
+                            }
+                        } catch (e) {}
+
+                        const senderAddr = (item.from && item.from.address) ? item.from.address : 'external@sender.org';
+                        const msgTime = item.createdAt
+                            ? new Date(item.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                            : new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                        inboxStore[email].unshift({
+                            id: msgId,
+                            remoteId: item.id,
+                            sender: senderAddr,
+                            subject: item.subject || '(No Subject)',
+                            body: fullBody,
+                            time: msgTime,
+                            unread: true
+                        });
+                        addedNew = true;
+                    }
+                }
+
+                if (addedNew) {
+                    safeSetStorage('multimail_inboxes_v2', inboxStore);
+                    renderInboxForActiveEmail();
+                    showToast(`New real-time email arrived in ${email}!`, 'success');
+                } else if (!silent) {
+                    renderInboxForActiveEmail();
+                }
+            } catch (err) {
+                // Silent fallback if offline
+            }
+        }
+
         function extractOtpFromText(text) {
             if (!text) return null;
-            const match = text.match(/\b(\d{4,8})\b/);
-            return match ? match[1] : null;
+            // First check for explicit OTP / verification code patterns
+            const labeled = text.match(/(?:code|otp|pin|passcode|verification)[\s:\-is]*(\d{4,8})\b/i);
+            if (labeled && labeled[1]) return labeled[1];
+            // Next prefer 5 to 8 digit codes
+            const fivePlus = text.match(/\b(\d{5,8})\b/);
+            if (fivePlus && fivePlus[1]) return fivePlus[1];
+            // Finally check 4-digit numbers excluding common calendar years (2020-2030)
+            const fourMatches = text.match(/\b(\d{4})\b/g) || [];
+            for (const cand of fourMatches) {
+                const num = parseInt(cand, 10);
+                if (num < 2020 || num > 2030) return cand;
+            }
+            return null;
         }
 
         function attachFirebaseInboxListener(email) {
@@ -4356,7 +6175,7 @@ Security Team</textarea>
                 emptyState.style.display = 'flex';
                 listContainer.style.display = 'none';
                 statusTitle.innerText = 'No Active Email Selected';
-                statusDesc.innerText = 'Create or select an email address on the left panel to view incoming messages.';
+                statusDesc.innerText = 'Create an email address or click "Recover Email" on the left panel to view incoming messages.';
                 return;
             }
 
@@ -4367,7 +6186,7 @@ Security Team</textarea>
                 emptyState.style.display = 'flex';
                 listContainer.style.display = 'none';
                 statusTitle.innerText = `Inbox Empty for ${activeEmail}`;
-                statusDesc.innerText = 'Waiting for incoming emails... Click "Simulate OTP Mail" above to test instant delivery.';
+                statusDesc.innerText = 'Waiting for incoming real-time emails... Click "Simulate OTP Mail" above to test instant delivery.';
                 return;
             }
 
@@ -4509,7 +6328,7 @@ Security Team</textarea>
             } else if (savedMails.length > 0) {
                 targetInput.value = savedMails[0];
             } else {
-                targetInput.value = `demo.user${defaultDomain}`;
+                targetInput.value = `demo.user${getActiveDefaultDomain()}`;
             }
             fillOtpPreset();
             document.getElementById('testEmailModal').classList.add('open');
@@ -4544,6 +6363,8 @@ Security Team</textarea>
             inboxStore[recipient].unshift(newMsg);
             safeSetStorage('multimail_inboxes_v2', inboxStore);
 
+            ensureRecoveryKitForEmail(recipient);
+
             if (!savedMails.includes(recipient)) {
                 savedMails.unshift(recipient);
                 safeSetStorage('multimail_saved_accounts_v2', savedMails);
@@ -4566,12 +6387,14 @@ Security Team</textarea>
             }
             const icon = document.getElementById('reloadSpinIcon');
             if (icon) icon.classList.add('fa-spin');
-            countdownSeconds = 10;
-            setTimeout(() => {
-                if (icon) icon.classList.remove('fa-spin');
-                renderInboxForActiveEmail();
-                showToast('Inbox synced with server!', 'info');
-            }, 500);
+            countdownSeconds = 5;
+            pollLiveApiMessages(activeEmail, false).finally(() => {
+                setTimeout(() => {
+                    if (icon) icon.classList.remove('fa-spin');
+                    renderInboxForActiveEmail();
+                    showToast('Inbox synced with server!', 'info');
+                }, 400);
+            });
         }
 
         function escapeHtml(str) {
@@ -4586,14 +6409,17 @@ Security Team</textarea>
             return String(str || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'");
         }
 
-        // Auto-refresh 10s ticker
+        // Auto-refresh 10s ticker (polls live API & updates UI)
         setInterval(() => {
             const label = document.getElementById('refreshCountdown');
             if (!label) return;
             countdownSeconds--;
             if (countdownSeconds <= 0) {
-                countdownSeconds = 10;
-                if (activeEmail) renderInboxForActiveEmail();
+                countdownSeconds = 5;
+                if (activeEmail) {
+                    pollLiveApiMessages(activeEmail, true);
+                    renderInboxForActiveEmail();
+                }
             }
             label.innerText = `${countdownSeconds}s`;
         }, 1000);
@@ -4659,7 +6485,18 @@ Security Team</textarea>
             if (!domains.includes(defaultDomain) && domains.length > 0) {
                 defaultDomain = domains[0];
             }
+            if (!realDomains.includes(defaultRealDomain) && realDomains.length > 0) {
+                defaultRealDomain = realDomains[0];
+            }
+            const deadDomains = ['@dollicons.com', '@cebaike.com', '@mechanicspedia.com', '@knickerbockerban.com', '@rcmails.com', '@wireconnected.com', '@1secmail.com', '@1secmail.org', '@1secmail.net', '@wwjmp.com', '@esiix.com', '@sharklasers.com', '@grr.la', '@guerrillamail.com', '@phuturemail.com'];
+            savedMails = savedMails.filter(m => !deadDomains.some(d => m.endsWith(d)));
+            safeSetStorage('multimail_saved_accounts_v2', savedMails);
+            if (activeEmail && deadDomains.some(d => activeEmail.endsWith(d))) {
+                activeEmail = savedMails[0] || '';
+                safeSetStorage('multimail_active_email_v2', activeEmail);
+            }
             renderDomains(true);
+            fetchRealtimeDomainsFromApi(false);
             renderSavedMails();
             if (activeEmail) {
                 setActiveEmail(activeEmail);
@@ -4669,6 +6506,13 @@ Security Team</textarea>
                 document.getElementById('generatedPasswordText').value = savedCustomPwd;
             } else {
                 generateStrongPassword(true);
+            }
+            if (!window.location.hash) {
+                try {
+                    history.replaceState({ page: 'home' }, '', '#/home');
+                } catch (e) {}
+            } else {
+                syncPageFromUrl();
             }
         };
     </script>
